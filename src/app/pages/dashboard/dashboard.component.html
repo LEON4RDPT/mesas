@@ -13,7 +13,7 @@
                             'bg-gray-700 text-white rounded-xl': selectedPage === 0,
                             'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 0
                         }"
-                        class="w-full text-left block p-2 text-gray-200"
+                        class="cursor-pointer w-full text-left block p-2 text-gray-200"
                     >
                         Mesas
                     </button>
@@ -25,9 +25,9 @@
                             'bg-gray-700 text-white rounded-xl': selectedPage === 1,
                             'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 1
                         }"
-                        class="w-full text-left block p-2 text-gray-200"
+                        class="cursor-pointer w-full text-left block p-2 text-gray-200"
                     >
-                        Calendário
+                        Tabela Reservas
                     </button>
                 </li>
                 <li>
@@ -37,7 +37,7 @@
                             'bg-gray-700 text-white rounded-xl': selectedPage === 2,
                             'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 2
                         }"
-                        class="w-full text-left block p-2 text-gray-200"
+                        class="cursor-pointer w-full text-left block p-2 text-gray-200"
                     >
                         Estatisticas
                     </button>
@@ -49,9 +49,21 @@
                             'bg-gray-700 text-white rounded-xl': selectedPage === 3,
                             'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 3
                         }"
-                        class="w-full text-left block p-2 text-gray-200"
+                        class="cursor-pointer w-full text-left block p-2 text-gray-200"
                     >
                         Utilizadores
+                    </button>
+                </li>
+                <li>
+                    <button
+                        (click)="selectedPage = 4"
+                        [ngClass]="{
+                            'bg-gray-700 text-white rounded-xl': selectedPage === 4,
+                            'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 4
+                        }"
+                        class="cursor-pointer w-full text-left block p-2 text-gray-200"
+                    >
+                        Nova Reserva
                     </button>
                 </li>
             </ul>
@@ -60,10 +72,11 @@
         <!-- Main Content -->
         <main class="w-5/6 bg-gray-500 p-6">
             <div [ngSwitch]="selectedPage">
-                <div *ngSwitchCase="0">Mesas Content</div>
-                <div *ngSwitchCase="1">Calendário Content</div>
+                <app-mesas *ngSwitchCase="0"></app-mesas>
+                <app-calendario *ngSwitchCase="1">Calendário Content</app-calendario>
                 <div *ngSwitchCase="2">Estatisticas Content</div>
                 <app-utilizadores *ngSwitchCase="3"></app-utilizadores>
+                <app-add-reserva *ngSwitchCase="4"></app-add-reserva>
                 <div *ngSwitchDefault>Selecione uma opção</div>
             </div>
         </main>

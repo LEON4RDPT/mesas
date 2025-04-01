@@ -1,0 +1,82 @@
+<div class="flex justify-center">
+  <div
+    class="relative container w-3/5 h-3/4 bg-white shadow-2xl text-black rounded-lg min-h-[75vh]"
+  >
+    <div class="m-3 text-xl">
+      <h1 class="text-center">Selecione o Dia</h1>
+      <div class="text-center mt-3">
+        <input
+          type="date"
+          [valueAsDate]="dateSelected"
+          [value]="thisDate"
+          [min]="thisDate"
+          (change)="loadDay($event)"
+        />
+      </div>
+      <div class="mt-10">
+        <table class="min-w-full border-collapse">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="border px-4 py-2">User</th>
+              <th class="border px-4 py-2">Mesa</th>
+              <th class="border px-4 py-2">Data Inicio</th>
+              <th class="border px-4 py-2">Data Fim</th>
+              <th class="border px-4 py-2">Data Reserva</th>
+              <th class="border px-4 py-2">Ação</th>
+            </tr>
+          </thead>
+          <tbody class="text-center" *ngFor="let reserva of reservasSelected">
+            <!-- Example row -->
+            <tr>
+              <td class="border px-4 py-2">
+                <button
+                  class="cursor-pointer text-blue-500 hover:underline focus:outline-none"
+                >
+                  {{ reserva.user.nome }}
+                </button>
+              </td>
+              <td class="border px-4 py-2">
+                <button
+                  class="cursor-pointer text-blue-500 hover:underline focus:outline-none"
+                >
+                  {{ reserva.mesa.id }}
+                </button>
+              </td>
+              <td class="border px-4 py-2">
+                {{ reserva.dataInico.getHours() }}:{{
+                  reserva.dataInico.getMinutes() < 10
+                    ? '0' + reserva.dataInico.getMinutes()
+                    : reserva.dataInico.getMinutes()
+                }}
+              </td>
+              <td class="border px-4 py-2">
+                {{ reserva.dataFim.getHours() }}:{{
+                  reserva.dataFim.getMinutes() < 10
+                    ? '0' + reserva.dataFim.getMinutes()
+                    : reserva.dataFim.getMinutes()
+                }}
+              </td>
+              <td class="border px-4 py-2">
+                {{ reserva.dataReserva.getHours() }}:{{
+                  reserva.dataReserva.getMinutes() < 10
+                    ? '0' + reserva.dataReserva.getMinutes()
+                    : reserva.dataReserva.getMinutes()
+                }}
+              </td>
+              <td class="border px-4 py-2">
+                <button class="bg-red-500 cursor-pointer hover:bg-red-600 text-white p-2 rounded-2xl ">Remover</button>
+              </td>
+            </tr>
+            <!-- Additional rows can be added here -->
+          </tbody>
+          <tr *ngIf="reservasSelected.length === 0">
+              <td class="border px-4 py-2 text-center" colspan="6">
+                Nenhuma Reserva agendada!
+              </td>
+            </tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

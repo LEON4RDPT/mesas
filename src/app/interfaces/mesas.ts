@@ -1,4 +1,4 @@
-export interface Mesas {
+export interface Mesa {
     id: number,
     limiteTempoMin: number,
     localX: number,

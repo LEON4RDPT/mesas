@@ -1,0 +1,55 @@
+<div class="flex justify-center">
+    <div class="relative container w-3/5 h-2/4 bg-white shadow-2xl text-black rounded-lg min-h-[50vh] p-6">
+      <h2 class="text-center text-xl mb-4">Criar Nova Reserva</h2>
+      <form (ngSubmit)="createReserva()">
+        <!-- Mesa Selection -->
+        <div class="mb-4">
+          <label for="mesa" class="block mb-1">Mesa</label>
+          <select (change)="handleSelectMesa($event)" id="mesa" name="mesa" class="w-full border rounded px-3 py-2" required>
+            <option value="" disabled selected>Selecione uma mesa</option>
+            <option *ngFor="let mesa of mesas">{{ mesa.id }}</option>
+          </select>
+        </div>
+  
+        <!-- Day Selection -->
+        <div class="mb-4 w-2/3">
+          <label for="dataReserva" class="block mb-1">Selecione o Dia</label>
+          <input
+            type="date"
+            id="dataReserva"
+            name="dataReserva"
+            class="w-full border rounded px-3 py-2"
+            [min]="today"
+            (change)="onDateChange($event)"
+            required
+          />
+        </div>
+  
+        <!-- Time Selection (only visible after a day is selected) -->
+        
+        <div *ngIf="selectedDate" class="flex justify-start">
+            <div class="mb-4 mr-3 w-1/3">
+              <label for="horaInico" class="block mb-1">Hora Início</label>
+              <app-custom-time-picker
+                [minTime]="'00:00'"
+                (timeChange)="onHoraInicioChange($event)">
+              </app-custom-time-picker>
+            </div>
+            <div class="mb-4 w-1/3 ml-2">
+              <label for="horaFim" class="block mb-1">Hora Fim</label>
+              <app-custom-time-picker
+                [minTime]="horaInicio"
+                (timeChange)="onHoraFimChange($event)">
+              </app-custom-time-picker>
+            </div>
+          </div>
+  
+        <div class="absolute bottom-0 left-0 w-full flex justify-center pb-4">
+            <button type="submit" class="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded">
+            Criar Reserva
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
