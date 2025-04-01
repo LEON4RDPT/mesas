@@ -3,17 +3,69 @@
         <!-- Sidebar -->
         <aside class="w-1/6 bg-gray-600 p-4">
             <ul class="space-y-2">
-                <li><a href="" class="text-2xl block p-2 font-semibol">Dashboard</a></li>
-                <li><a href="#" class="block p-2 hover:bg-gray-700  hover:rounded-xl">Mesas</a></li>
-                <li><a href="#" class="block p-2 hover:bg-gray-700  hover:rounded-xl">Calendário</a></li>
-                <li><a href="#" class="block p-2 hover:bg-gray-700  hover:rounded-xl">Estatisticas</a></li>
-                <li><a href="#" class="block p-2 hover:bg-gray-700  hover:rounded-xl">Utilizadores</a></li>
+                <li>
+                    <h1 class="text-2xl mb-5">Dashboard</h1>
+                </li>
+                <li>
+                    <button
+                        (click)="selectedPage = 0"
+                        [ngClass]="{
+                            'bg-gray-700 text-white rounded-xl': selectedPage === 0,
+                            'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 0
+                        }"
+                        class="w-full text-left block p-2 text-gray-200"
+                    >
+                        Mesas
+                    </button>
+                </li>
+                <li>
+                    <button
+                        (click)="selectedPage = 1"
+                        [ngClass]="{
+                            'bg-gray-700 text-white rounded-xl': selectedPage === 1,
+                            'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 1
+                        }"
+                        class="w-full text-left block p-2 text-gray-200"
+                    >
+                        Calendário
+                    </button>
+                </li>
+                <li>
+                    <button
+                        (click)="selectedPage = 2"
+                        [ngClass]="{
+                            'bg-gray-700 text-white rounded-xl': selectedPage === 2,
+                            'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 2
+                        }"
+                        class="w-full text-left block p-2 text-gray-200"
+                    >
+                        Estatisticas
+                    </button>
+                </li>
+                <li>
+                    <button
+                        (click)="selectedPage = 3"
+                        [ngClass]="{
+                            'bg-gray-700 text-white rounded-xl': selectedPage === 3,
+                            'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 3
+                        }"
+                        class="w-full text-left block p-2 text-gray-200"
+                    >
+                        Utilizadores
+                    </button>
+                </li>
             </ul>
         </aside>
 
         <!-- Main Content -->
         <main class="w-5/6 bg-gray-500 p-6">
-            <app-utilizadores></app-utilizadores>
+            <div [ngSwitch]="selectedPage">
+                <div *ngSwitchCase="0">Mesas Content</div>
+                <div *ngSwitchCase="1">Calendário Content</div>
+                <div *ngSwitchCase="2">Estatisticas Content</div>
+                <app-utilizadores *ngSwitchCase="3"></app-utilizadores>
+                <div *ngSwitchDefault>Selecione uma opção</div>
+            </div>
         </main>
     </div>
 </div>
