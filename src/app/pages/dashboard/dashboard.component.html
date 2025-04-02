@@ -73,8 +73,8 @@
         <main class="w-5/6 bg-gray-500 p-6">
             <div [ngSwitch]="selectedPage">
                 <app-mesas *ngSwitchCase="0"></app-mesas>
-                <app-calendario *ngSwitchCase="1">Calendário Content</app-calendario>
-                <div *ngSwitchCase="2">Estatisticas Content</div>
+                <app-calendario *ngSwitchCase="1"></app-calendario>
+                <app-statistics *ngSwitchCase="2"></app-statistics>
                 <app-utilizadores *ngSwitchCase="3"></app-utilizadores>
                 <app-add-reserva *ngSwitchCase="4"></app-add-reserva>
                 <div *ngSwitchDefault>Selecione uma opção</div>

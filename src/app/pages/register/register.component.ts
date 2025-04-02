@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { CommonModule } from '@angular/common';
 import { UserWithPassword } from '../../interfaces/users';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ export class RegisterComponent {
   registerForm: FormGroup;
   passwordsDoNotMatch: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     // Initialize the form with validation rules
     this.registerForm = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3)]],
@@ -37,9 +38,26 @@ export class RegisterComponent {
       }
       this.passwordsDoNotMatch = false;
       console.log('Form submitted successfully:', this.registerForm.value);
-      const user: UserWithPassword = {id:0,nome: this.registerForm.value.nome, password: this.registerForm.value.password, email: this.registerForm.value.email, isAdmin: false}
+      const user: UserWithPassword = {
+        id: 0, name: this.registerForm.value.nome, password: this.registerForm.value.password, email: this.registerForm.value.email,
+        isAdmin: false
+      }
       console.log(user);
-      alert('Registration successful!');
+      this.authService.register(user).subscribe({
+        next: (response) => {
+          if (response.ok) {
+            alert("Registado com sucesso!");
+          }
+        },
+        error:(error) => {
+          if (error.status === 400) {
+            alert("Email já existente!");
+          } else {
+            alert("Erro!");
+            console.log(error);
+          } 
+        }
+      })
     } else {
       console.log('Form is invalid');
     }

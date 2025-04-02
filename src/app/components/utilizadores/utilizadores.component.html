@@ -15,7 +15,7 @@
             >
                 <th scope="col" class="px-6 py-3">{{ user.id }}</th>
                 <th scope="col" class="px-6 py-3">{{ user.email }}</th>
-                <th scope="col" class="px-6 py-3">{{ user.nome }}</th>
+                <th scope="col" class="px-6 py-3">{{ user.name }}</th>
                 <th scope="col" class="px-6 py-3">
                     <button (click)="openEditModal(user)" class="cursor-pointer bg-blue-500 hover:bg-blue-700 text-white  py-2 mr-1 px-4 rounded">
                         Editar
@@ -33,7 +33,7 @@
 <ng-template #noUsers>
     <div class="flex justify-center items-center h-full">
         <h1 class="text-center text-3xl 
-        ">Nenhum Utilizador Rr</h1>
+        ">Nenhum Utilizador Registado</h1>
     </div>
 </ng-template>
 

@@ -7,7 +7,12 @@ export interface User {
 export interface UserWithPassword {
     id: number,
     email: string,
-    nome: string,
+    name: string,
     password: string,
-    isAdmin: boolean,
+    isAdmin: false,
+}
+
+export interface UserLogin {
+    email: string,
+    password: string,
 }

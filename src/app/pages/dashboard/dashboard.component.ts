@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { CalendarioComponent } from "../../components/calendario/calendario.component";
 import { AddReservaComponent } from "../../components/add-reserva/add-reserva.component";
 import { MesasComponent } from "../../components/mesas/mesas.component";
+import { StatisticsComponent } from "../../components/statistics/statistics.component";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [UtilizadoresComponent, CommonModule, CalendarioComponent, AddReservaComponent, MesasComponent],
+  imports: [UtilizadoresComponent, CommonModule, CalendarioComponent, AddReservaComponent, MesasComponent, StatisticsComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

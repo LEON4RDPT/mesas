@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../../services/user.service';
+import { UserWithPassword } from '../../interfaces/users';
 
 @Component({
   selector: 'app-utilizadores',
@@ -8,12 +10,11 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './utilizadores.component.html',
   styleUrl: './utilizadores.component.css'
 })
-export class UtilizadoresComponent {
-  users = [
-    { id: 1, email: 'user1@example.com', nome: 'nome1' },
-    { id: 2, email: 'user2@example.com', nome: 'nome2' },
-    { id: 3, email: 'user3@example.com', nome: 'nome3' },
-  ];
+export class UtilizadoresComponent implements OnInit {
+  
+  constructor(private userService: UserService) {}
+
+  users: UserWithPassword[] = []
 
   isModalOpen = false;
   selectedUser: any = null;
@@ -35,5 +36,18 @@ export class UtilizadoresComponent {
       this.users[index] = { ...this.selectedUser };
     }
     this.closeModal();
+  }
+
+  ngOnInit(): void {
+    this.userService.getAll().subscribe({
+      next: (response) =>{
+        this.users = response.body ?? [];
+      },
+      error:(error) => {
+        if (error.status === 404) {
+          this.users = [];
+        }
+      }
+    })
   }
 }
