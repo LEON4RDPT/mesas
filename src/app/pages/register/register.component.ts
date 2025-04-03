@@ -4,10 +4,11 @@ import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { CommonModule } from '@angular/common';
 import { UserWithPassword } from '../../interfaces/users';
 import { AuthService } from '../../services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
-  imports: [CommonModule,NavbarComponent,ReactiveFormsModule],
+  imports: [CommonModule,NavbarComponent  ,ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
@@ -16,7 +17,7 @@ export class RegisterComponent {
   registerForm: FormGroup;
   passwordsDoNotMatch: boolean = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService) {
     // Initialize the form with validation rules
     this.registerForm = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3)]],
@@ -42,20 +43,21 @@ export class RegisterComponent {
         id: 0, name: this.registerForm.value.nome, password: this.registerForm.value.password, email: this.registerForm.value.email,
         isAdmin: false
       }
-      console.log(user);
       this.authService.register(user).subscribe({
         next: (response) => {
           if (response.ok) {
             alert("Registado com sucesso!");
+            this.router.navigate(['/login'])
           }
         },
         error:(error) => {
           if (error.status === 400) {
+            alert("dados Inválidos!")
+          } else if (error.status === 409) {
             alert("Email já existente!");
           } else {
-            alert("Erro!");
-            console.log(error);
-          } 
+            alert("Erro no Servidor!");
+          }
         }
       })
     } else {

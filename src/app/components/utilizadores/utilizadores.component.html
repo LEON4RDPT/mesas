@@ -1,45 +1,53 @@
-<div *ngIf="users && users.length > 0; else noUsers" class="relative overflow-x-auto shadow-md rounded-lg w-1/2 mx-auto mt-10">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-100 dark:text-white">
-        <thead class="text-xs text-white uppercase bg-gray-600 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">Id</th>
-                <th scope="col" class="px-6 py-3">Email</th>
-                <th scope="col" class="px-6 py-3">Nome</th>
-                <th scope="col" class="px-6 py-3">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr
-                class="" 
-                *ngFor="let user of users"
-            >
-                <th scope="col" class="px-6 py-3">{{ user.id }}</th>
-                <th scope="col" class="px-6 py-3">{{ user.email }}</th>
-                <th scope="col" class="px-6 py-3">{{ user.name }}</th>
-                <th scope="col" class="px-6 py-3">
-                    <button (click)="openEditModal(user)" class="cursor-pointer bg-blue-500 hover:bg-blue-700 text-white  py-2 mr-1 px-4 rounded">
-                        Editar
-                    </button>
-                    <button class="cursor-pointer bg-red-500 hover:bg-red-700 text-white  py-2 px-4 rounded">
-                        Desativar
-                    </button>
-                </th>
-            </tr>
-        </tbody>
-    </table>
+<div *ngIf="!isLoading">
+    <div *ngIf="users && users.length > 0; else noUsers" class="relative overflow-x-auto shadow-md rounded-lg w-1/2 mx-auto mt-10">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-100 dark:text-white">
+            <thead class="text-xs text-white uppercase bg-gray-600 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">Id</th>
+                    <th scope="col" class="px-6 py-3">Email</th>
+                    <th scope="col" class="px-6 py-3">Nome</th>
+                    <th scope="col" class="px-6 py-3">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    class="" 
+                    *ngFor="let user of users"
+                >
+                    <th scope="col" class="px-6 py-3">{{ user.id }}</th>
+                    <th scope="col" class="px-6 py-3">{{ user.email }}</th>
+                    <th scope="col" class="px-6 py-3">{{ user.name }}</th>
+                    <th scope="col" class="px-6 py-3">
+                        <button (click)="openEditModal(user)" class="cursor-pointer bg-blue-500 hover:bg-blue-700 text-white  py-2 mr-1 px-4 rounded">
+                            Editar
+                        </button>
+                        <button (click)="handleDelete(user.id)" class="cursor-pointer bg-red-500 hover:bg-red-700 text-white  py-2 px-4 rounded">
+                            Desativar
+                        </button>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Fallback message when no users are available -->
+    <ng-template #noUsers>
+        <div class="flex justify-center items-center h-full">
+            <h1 class="text-center text-3xl 
+            ">Nenhum Utilizador Registado</h1>
+        </div>
+    </ng-template>
 </div>
 
-<!-- Fallback message when no users are available -->
-<ng-template #noUsers>
-    <div class="flex justify-center items-center h-full">
-        <h1 class="text-center text-3xl 
-        ">Nenhum Utilizador Registado</h1>
+<div *ngIf="isLoading" class="flex items-center justify-center h-[calc(100vh-4rem)] "  >
+    <div>
+        <app-loader [mode]="'WHITE'"></app-loader>
     </div>
-</ng-template>
+</div>
 
 <div
     *ngIf="isModalOpen"
-    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+    class="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
 >
     <div class="bg-gray-800 text-gray-200 p-6 rounded-lg shadow-lg w-1/3">
         <h2 class="text-xl  mb-4">Editar Utilizador</h2>
@@ -49,36 +57,73 @@
                 <input
                     type="email"
                     id="email"
-                    [(ngModel)]="selectedUser.email"
+                    *ngIf="selectedUser" [(ngModel)]="selectedUser.email"
                     name="email"
                     class="w-full mt-1 p-2 bg-gray-700 text-gray-200 rounded border border-gray-600"
                 />
             </div>
             <div class="mb-4">
-                <label for="nome" class="block text-sm font-medium">nome</label>
+                <label for="nome" class="block text-sm font-mediusm">nome</label>
                 <input
                     type="text"
                     id="nome"
-                    [(ngModel)]="selectedUser.nome"
+                    *ngIf="selectedUser" [(ngModel)]="selectedUser.name"
                     name="nome"
                     class="w-full mt-1 p-2 bg-gray-700 text-gray-200 rounded border border-gray-600"
                 />
             </div>
-            <div class="flex justify-end space-x-2">
-                <button
-                    type="button"
-                    class="cursor-pointer bg-gray-600 hover:bg-gray-700 text-white  py-2 px-4 rounded"
-                    (click)="closeModal()"
-                >
-                    Cancelar
-                </button>
-                <button
-                    type="submit"
-                    class="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white  py-2 px-4 rounded"
-                >
-                    Salvar
-                </button>
+            <div class="mb-4">
+                <label for="newpassword" class="block text-sm font-mediusm">Password <span class="pl-2">*Deixe em branco caso não queira alterar</span></label>
+                <input
+                    type="password"
+                    id="newpassword"
+                    *ngIf="selectedUser" [(ngModel)]="newPasswordForUser"
+                    name="newpassword"
+                    class="w-full mt-1 p-2 bg-gray-700 text-gray-200 rounded border border-gray-600"
+                />  
             </div>
+            <div class="mb-6">
+                <div class="flex items-center">
+                    <input
+                        type="checkbox"
+                        id="admin"
+                        name="admin"
+                        *ngIf="selectedUser" [(ngModel)]="selectedUser.isAdmin"
+                        class="w-5 h-5 text-blue-500 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
+                    />
+                    <span class="ml-2 text-gray-200">Tornar este utilizador administrador</span>
+                </div>
+            </div>
+            <div class="flex items-center justify-between mb-1">
+                <!-- Password Input on the Left -->
+                <div class="w-1/2 pr-4">
+                    <label for="passwordconf" class="block text-sm font-medium">Sua password:</label>
+                    <input
+                        type="password"
+                        id="passwordconf"
+                        name="passwordconf"
+                        class="w-full mt-1 p-2 bg-gray-700 text-gray-200 rounded border border-gray-600"
+                    />
+                </div>
+            
+                <!-- Buttons on the Right -->
+                <div class="flex space-x-2 mt-auto">
+                    <button
+                        type="button"
+                        class="cursor-pointer bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded"
+                        (click)="closeModal()"
+                    >
+                        Cancelar
+                    </button>
+                    <button
+                        type="submit"
+                        class="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
+                        
+                    >
+                        Salvar
+                    </button>
+                </div>
+            </div>   
         </form>
     </div>
 </div>

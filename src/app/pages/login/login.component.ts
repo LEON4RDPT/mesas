@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { CookieService } from '../../services/cookie.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,7 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private auth: AuthService) {
+  constructor(private router: Router, private fb: FormBuilder, private auth: AuthService, private cookieHandler: CookieService) {
     // Initialize the form with validation rules
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -29,18 +31,24 @@ export class LoginComponent {
       this.auth.login({ email, password }).subscribe({
         next: (response) => {
           console.log('Response:', response);
-          switch (response.status) {
-            case 200:
-              alert('Login bem sucedido');
-              break;
-            default:
-              alert('Erro!');
-              break;
-          }
+          const token = response.body.token;
+          if (!token) return;
+          this.cookieHandler.setCookie('authToken',token,1);
+          alert("Login bem sucedido!")
+          this.router.navigate(['/dashboard'])
         },
         error: (error) => {
-          console.error('Error:', error);
-          alert('Erro ao fazer login!');
+          switch (error.status) {
+            case 404: 
+              alert("Utilizador não encontrado!");
+              break;
+            case 401:
+              alert("Password incorreta!");
+              break;
+            case 400:
+              alert("Campos inválidos!")
+              break;
+          }
         },
       });
     } else {

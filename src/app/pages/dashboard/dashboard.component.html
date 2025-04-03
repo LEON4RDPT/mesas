@@ -1,84 +1,121 @@
-<div class="min-h-screen flex flex-col bg-gray-600 text-gray-200">
-    <div class="flex flex-1">
-        <!-- Sidebar -->
-        <aside class="w-1/6 bg-gray-600 p-4">
-            <ul class="space-y-2">
-                <li>
-                    <h1 class="text-2xl mb-5">Dashboard</h1>
-                </li>
-                <li>
-                    <button
-                        (click)="selectedPage = 0"
-                        [ngClass]="{
-                            'bg-gray-700 text-white rounded-xl': selectedPage === 0,
-                            'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 0
-                        }"
-                        class="cursor-pointer w-full text-left block p-2 text-gray-200"
-                    >
-                        Mesas
-                    </button>
-                </li>
-                <li>
-                    <button
-                        (click)="selectedPage = 1"
-                        [ngClass]="{
-                            'bg-gray-700 text-white rounded-xl': selectedPage === 1,
-                            'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 1
-                        }"
-                        class="cursor-pointer w-full text-left block p-2 text-gray-200"
-                    >
-                        Tabela Reservas
-                    </button>
-                </li>
-                <li>
-                    <button
-                        (click)="selectedPage = 2"
-                        [ngClass]="{
-                            'bg-gray-700 text-white rounded-xl': selectedPage === 2,
-                            'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 2
-                        }"
-                        class="cursor-pointer w-full text-left block p-2 text-gray-200"
-                    >
-                        Estatisticas
-                    </button>
-                </li>
-                <li>
-                    <button
-                        (click)="selectedPage = 3"
-                        [ngClass]="{
-                            'bg-gray-700 text-white rounded-xl': selectedPage === 3,
-                            'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 3
-                        }"
-                        class="cursor-pointer w-full text-left block p-2 text-gray-200"
-                    >
-                        Utilizadores
-                    </button>
-                </li>
-                <li>
-                    <button
-                        (click)="selectedPage = 4"
-                        [ngClass]="{
-                            'bg-gray-700 text-white rounded-xl': selectedPage === 4,
-                            'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 4
-                        }"
-                        class="cursor-pointer w-full text-left block p-2 text-gray-200"
-                    >
-                        Nova Reserva
-                    </button>
-                </li>
-            </ul>
-        </aside>
+<div
+  *ngIf="!isLoading"
+  class="min-h-screen flex flex-col bg-gray-600 text-gray-200"
+>
+  <div class="flex flex-1">
+    <!-- Sidebar -->
+    <aside class="w-1/6 bg-gray-600 p-4 flex flex-col justify-between">
+      <ul class="space-y-2">
+        <li>
+          <h1 class="text-2xl mb-5 font-semibold">Dashboard</h1>
+        </li>
+        <li>
+          <button
+            (click)="selectedPage = 0"
+            [ngClass]="{
+              'bg-gray-700 text-white rounded-xl': selectedPage === 0,
+              'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 0
+            }"
+            class="cursor-pointer w-full text-left block p-2 text-gray-200"
+          >
+            Mesas
+          </button>
+        </li>
+        <li>
+          <button
+            *ngIf="isAdmin"
+            (click)="selectedPage = 1"
+            [ngClass]="{
+              'bg-gray-700 text-white rounded-xl': selectedPage === 1,
+              'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 1
+            }"
+            class="cursor-pointer w-full text-left block p-2 text-gray-200"
+          >
+            Tabela Reservas
+          </button>
+        </li>
+        <li>
+          <button
+            *ngIf="isAdmin"
+            (click)="selectedPage = 2"
+            [ngClass]="{
+              'bg-gray-700 text-white rounded-xl': selectedPage === 2,
+              'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 2
+            }"
+            class="cursor-pointer w-full text-left block p-2 text-gray-200"
+          >
+            Estatisticas
+          </button>
+        </li>
+        <li>
+          <button
+            *ngIf="isAdmin"
+            (click)="selectedPage = 3"
+            [ngClass]="{
+              'bg-gray-700 text-white rounded-xl': selectedPage === 3,
+              'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 3
+            }"
+            class="cursor-pointer w-full text-left block p-2 text-gray-200"
+          >
+            Utilizadores
+          </button>
+        </li>
+        <li>
+          <button
+            (click)="selectedPage = 4"
+            [ngClass]="{
+              'bg-gray-700 text-white rounded-xl': selectedPage === 4,
+              'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 4
+            }"
+            class="cursor-pointer w-full text-left block p-2 text-gray-200"
+          >
+            Nova Reserva
+          </button>
+        </li>
+      </ul>
+      <div class="flex space-x-4 mt-4">
+        <button
+          (click)="logout()"
+          class="bg-red-600 text-white w-full py-2 rounded-lg hover:bg-red-700 shadow-xl"
+        >
+          Sair
+        </button>
+        <button
+          (click)="settings()"
+          class="bg-gray-700 text-white w-full py-2 rounded-lg hover:bg-gray-800 shadow-xl"
+        >
+          Configurações
+        </button>
+      </div>
+    </aside>
 
-        <!-- Main Content -->
-        <main class="w-5/6 bg-gray-500 p-6">
-            <div [ngSwitch]="selectedPage">
-                <app-mesas *ngSwitchCase="0"></app-mesas>
-                <app-calendario *ngSwitchCase="1"></app-calendario>
-                <app-statistics *ngSwitchCase="2"></app-statistics>
-                <app-utilizadores *ngSwitchCase="3"></app-utilizadores>
-                <app-add-reserva *ngSwitchCase="4"></app-add-reserva>
-                <div *ngSwitchDefault>Selecione uma opção</div>
-            </div>
-        </main>
-    </div>
+    <!-- Main Content -->
+    <main class="w-5/6 bg-gray-500 p-6">
+      <div [ngSwitch]="selectedPage">
+        <app-mesas *ngSwitchCase="0"></app-mesas>
+        <ng-container *ngIf="isAdmin">
+          <app-calendario *ngSwitchCase="1"></app-calendario>
+        </ng-container>
+        <ng-container *ngSwitchCase="2">
+          <app-statistics *ngIf="isAdmin"></app-statistics>
+        </ng-container>
+        <ng-container *ngIf="isAdmin">
+          <app-utilizadores [userId]="userData?.id ?? 0" *ngSwitchCase="3"></app-utilizadores>
+        </ng-container>
+        <app-add-reserva *ngSwitchCase="4"></app-add-reserva>
+        <div
+          *ngSwitchDefault
+          class="justify-center items-center flex text-3xl font-semibold"
+        >
+          Selecione uma opção
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<div
+  *ngIf="isLoading"
+  class="flex items-center justify-center h-screen bg-gray-100"
+>
+  <app-loader></app-loader>
 </div>
