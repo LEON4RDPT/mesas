@@ -72,6 +72,18 @@
             Nova Reserva
           </button>
         </li>
+        <li>
+          <button
+            (click)="selectedPage = 5"
+            [ngClass]="{
+              'bg-gray-700 text-white rounded-xl': selectedPage === 5,
+              'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 5
+            }"
+            class="cursor-pointer w-full text-left block p-2 text-gray-200"
+          >
+            Gerir Mesas
+          </button>
+        </li>
       </ul>
       <div class="flex space-x-4 mt-4">
         <button
@@ -102,7 +114,10 @@
         <ng-container *ngIf="isAdmin">
           <app-utilizadores [userId]="userData?.id ?? 0" *ngSwitchCase="3"></app-utilizadores>
         </ng-container>
-        <app-add-reserva *ngSwitchCase="4"></app-add-reserva>
+        <app-add-reserva [userId]="userData?.id ?? 0" *ngSwitchCase="4"></app-add-reserva>
+        <ng-container *ngIf="isAdmin">
+          <app-gerir-mesa *ngSwitchCase="5"></app-gerir-mesa>
+        </ng-container>
         <div
           *ngSwitchDefault
           class="justify-center items-center flex text-3xl font-semibold"

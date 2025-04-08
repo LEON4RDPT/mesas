@@ -1,42 +1,53 @@
 <div *ngIf="!isLoading">
-    <div *ngIf="users && users.length > 0; else noUsers" class="relative overflow-x-auto shadow-md rounded-lg w-1/2 mx-auto mt-10">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-100 dark:text-white">
-            <thead class="text-xs text-white uppercase bg-gray-600 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th scope="col" class="px-6 py-3">Id</th>
-                    <th scope="col" class="px-6 py-3">Email</th>
-                    <th scope="col" class="px-6 py-3">Nome</th>
-                    <th scope="col" class="px-6 py-3">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr
-                    class="" 
-                    *ngFor="let user of users"
-                >
-                    <th scope="col" class="px-6 py-3">{{ user.id }}</th>
-                    <th scope="col" class="px-6 py-3">{{ user.email }}</th>
-                    <th scope="col" class="px-6 py-3">{{ user.name }}</th>
-                    <th scope="col" class="px-6 py-3">
-                        <button (click)="openEditModal(user)" class="cursor-pointer bg-blue-500 hover:bg-blue-700 text-white  py-2 mr-1 px-4 rounded">
-                            Editar
+    <div class="shadow-2xl relative overflow-x-auto rounded-lg w-2/3 mx-auto mt-10">
+        <div
+          class="w-full text-sm text-left rtl:text-right bg-gray-700 min-h-[75vh] text-gray-100 dark:text-white shadow-2xl flex flex-col"
+        >
+          <h1 class="text-center font-semibold text-2xl pb-3 py-3">
+            Gestão de Utilizadores
+          </h1>
+      
+          <div class="flex-1 m-5 rounded-xl bg-gray-700 p-4">
+            <div *ngIf="!isLoading">
+              <div *ngIf="users && users.length > 0; else noUsers" class="relative overflow-x-auto ">
+                <table class=" w-full text-base text-left rtl:text-right text-gray-100 dark:text-white">
+                  <thead class="text-base text-white uppercase">
+                    <tr>
+                      <th scope="col" class="border-2 border-gray-400 px-8 py-4">Id</th>
+                      <th scope="col" class="border-2 border-gray-400 px-8 py-4">Email</th>
+                      <th scope="col" class="border-2 border-gray-400 px-8 py-4">Nome</th>
+                      <th scope="col" class="border-2 border-gray-400 px-8 py-4">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-gray-600">
+                    <tr *ngFor="let user of users">
+                      <th scope="row" class="px-8 py-4 font-medium border-2 border-gray-400">{{ user.id }}</th>
+                      <td class="px-8 py-4 border-2 border-gray-400">{{ user.email }}</td>
+                      <td class="px-8 py-4 border-2 border-gray-400">{{ user.name }}</td>
+                      <td class="px-8 py-4 border-2 border-gray-400">
+                        <button (click)="openEditModal(user)" class="cursor-pointer bg-blue-500 hover:bg-blue-700 text-white py-2 mr-1 px-4 rounded">
+                          Editar
                         </button>
-                        <button (click)="handleDelete(user.id)" class="cursor-pointer bg-red-500 hover:bg-red-700 text-white  py-2 px-4 rounded">
-                            Desativar
+                        <button (click)="handleDelete(user.id)" class="cursor-pointer bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded">
+                          Desativar
                         </button>
-                    </th>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-    <!-- Fallback message when no users are available -->
-    <ng-template #noUsers>
-        <div class="flex justify-center items-center h-full">
-            <h1 class="text-center text-3xl 
-            ">Nenhum Utilizador Registado</h1>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+      
+              <!-- Fallback message when no users are available -->
+              <ng-template #noUsers>
+                <div class="flex justify-center items-center h-full">
+                  <h1 class="text-center text-3xl">Nenhum Utilizador Registado</h1>
+                </div>
+              </ng-template>
+            </div>
+          </div>
         </div>
-    </ng-template>
+      </div>
+      
 </div>
 
 <div *ngIf="isLoading" class="flex items-center justify-center h-[calc(100vh-4rem)] "  >
@@ -95,19 +106,9 @@
                 </div>
             </div>
             <div class="flex items-center justify-between mb-1">
-                <!-- Password Input on the Left -->
-                <div class="w-1/2 pr-4">
-                    <label for="passwordconf" class="block text-sm font-medium">Sua password:</label>
-                    <input
-                        type="password"
-                        id="passwordconf"
-                        name="passwordconf"
-                        class="w-full mt-1 p-2 bg-gray-700 text-gray-200 rounded border border-gray-600"
-                    />
-                </div>
-            
+                
                 <!-- Buttons on the Right -->
-                <div class="flex space-x-2 mt-auto">
+                <div class=" flex space-x-2 mt-auto">
                     <button
                         type="button"
                         class="cursor-pointer bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded"

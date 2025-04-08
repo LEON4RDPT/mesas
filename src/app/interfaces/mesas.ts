@@ -3,6 +3,6 @@ export interface Mesa {
     limiteTempoMin: number,
     localX: number,
     localY: number,
-    CapacidadeUsers: number,
+    capacidadeUsers: number,
     ativo: boolean
 }

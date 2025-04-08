@@ -20,7 +20,6 @@ export class UtilizadoresComponent implements OnInit {
   isLoading: boolean = true;
   newPasswordForUser: string = '';
   users: UserWithPassword[] = []
-  password: string = "";
   isModalOpen = false;
   selectedUser: UserWithPassword|null = null;
 
@@ -88,7 +87,6 @@ export class UtilizadoresComponent implements OnInit {
   }
 
   handleDelete(userId: number) {
-    console.log(userId);
     if (!userId) {
       alert("Erro, Dados Inválidos!")
       return;

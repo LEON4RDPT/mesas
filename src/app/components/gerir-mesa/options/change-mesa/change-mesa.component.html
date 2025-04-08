@@ -1,0 +1,79 @@
+<div class="flex flex-col items-center p-6 rounded-lg text-white">
+    <h1 class="text-2xl font-semibold mb-4">Alterar Mesa</h1>
+
+    <!-- Combobox to Select a Mesa -->
+    <div class="w-full max-w-md mb-4">
+        <label for="mesaSelect" class="block text-sm font-medium mb-2">Selecione uma Mesa</label>
+        <select
+            id="mesaSelect"
+            [(ngModel)]="selectedMesaId"
+            (change)="onMesaSelect()"
+            class="w-full p-2 bg-gray-800 text-white rounded border border-gray-600"
+        >
+            <option *ngFor="let mesa of mesas" [value]="mesa.id">
+                Mesa {{ mesa.id }} - {{ mesa.ativo ? 'Ativo' : 'Inativo' }}
+            </option>
+        </select>
+    </div>
+
+    <!-- Form to Update Mesa -->
+    <form [formGroup]="changeForm" (ngSubmit)="onSubmit()" class="w-full max-w-md space-y-4">
+        <!-- Limite de Tempo (Minutos) -->
+        <div>
+            <label for="limiteTempoMin" class="block text-sm font-medium">Limite de Tempo (Minutos)</label>
+            <input
+                formControlName="tempo"
+                id="limiteTempoMin"
+                type="number"
+                class="w-full mt-1 p-2 bg-gray-800 text-white rounded border border-gray-600"
+                placeholder="Digite o limite de tempo"
+            />
+        </div>
+
+        <!-- Local X / Y -->
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label for="localX" class="block text-sm font-medium">Local X</label>
+                <input
+                    formControlName="localX"
+                    id="localX"
+                    type="number"
+                    class="w-full mt-1 p-2 bg-gray-800 text-white rounded border border-gray-600"
+                    placeholder="Digite a posição X"
+                />
+            </div>
+            <div>
+                <label for="localY" class="block text-sm font-medium">Local Y</label>
+                <input
+                    formControlName="localY"
+                    id="localY"
+                    type="number"
+                    class="w-full mt-1 p-2 bg-gray-800 text-white rounded border border-gray-600"
+                    placeholder="Digite a posição Y"
+                />
+            </div>
+        </div>
+
+        <!-- Capacidade de Utilizadores -->
+        <div>
+            <label for="CapacidadeUsers" class="block text-sm font-medium">Capacidade de Utilizadores</label>
+            <input
+                formControlName="cap"
+                id="CapacidadeUsers"
+                type="number"
+                class="w-full mt-1 p-2 bg-gray-800 text-white rounded border border-gray-600"
+                placeholder="Digite a capacidade de utilizadores"
+            />
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+            <button
+                type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded"
+            >
+                Alterar Mesa
+            </button>
+        </div>
+    </form>
+</div>

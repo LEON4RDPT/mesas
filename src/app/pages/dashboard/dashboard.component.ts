@@ -11,10 +11,11 @@ import { Router } from '@angular/router';
 import { User } from '../../interfaces/users';
 import { UserService } from '../../services/user.service';
 import { LoaderComponent } from "../../components/loader/loader.component";
+import { GerirMesaComponent } from '../../components/gerir-mesa/gerir-mesa.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [UtilizadoresComponent, CommonModule, CalendarioComponent, AddReservaComponent, MesasComponent, StatisticsComponent, LoaderComponent],
+  imports: [UtilizadoresComponent, CommonModule, CalendarioComponent, AddReservaComponent, MesasComponent, StatisticsComponent, LoaderComponent, GerirMesaComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -47,7 +48,7 @@ throw new Error('Method not implemented.');
       next: (response) => {
         this.isAdmin = response.body?.isAdmin || false;
         this.userData = {
-          nome: response.body?.name,
+          name: response.body?.name,
           email: response.body?.email,
           id: Number(id)
         }

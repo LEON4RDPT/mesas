@@ -2,35 +2,32 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Mesa } from '../../interfaces/mesas';
+import { MesasService } from '../../services/mesas.service';
 
 @Component({
   selector: 'app-mesas',
   imports: [CommonModule, FormsModule],
   templateUrl: './mesas.component.html',
-  styleUrl: './mesas.component.css'
+  styleUrl: './mesas.component.css',
 })
 export class MesasComponent implements OnInit {
+  mesas: Mesa[] = [];
+  maxX: number = 0;
+  maxY: number = 0;
+  selectedMesa: Mesa | null = null;
 
-  mesas: Mesa[] = []
-  maxX : number = 0;
-  maxY : number = 0;
-  selectedMesa : Mesa|null = null;
+  constructor(private mesasService: MesasService) {}
+
   ngOnInit(): void {
-   //todo get mesas
+    //todo get mesas
+    this.mesasService.getAllMesas().subscribe({
+      next:(response) => {
+        this.mesas = response.body ?? []
 
-   this.mesas.push({id: 0, localX:0, localY:0, CapacidadeUsers: 1, limiteTempoMin: 30, ativo: true})
-
-   this.mesas.forEach(mesa => {
-    let maxX = mesa.localX;
-    let maxY = mesa.localY;
-
-    if (this.maxX < maxX) {
-      this.maxX = maxX;
-    }
-    if (this.maxY < maxY) {
-      this.maxY = maxY;
-    }
-   });
+        this.maxX = Math.max(...this.mesas.map(m => m.localX), 0);
+        this.maxY = Math.max(...this.mesas.map(m => m.localY), 0);
+      }
+    })  
   }
   closeModal() {
     this.selectedMesa = null;

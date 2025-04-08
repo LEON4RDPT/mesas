@@ -1,7 +1,7 @@
 export interface User {
     id?: number,
     email?: string,
-    nome?: string,
+    name?: string,
 }
 
 export interface UserWithPassword {

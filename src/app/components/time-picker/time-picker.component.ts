@@ -1,13 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-custom-time-picker',
   template: `
-    <select 
-      class="w-full border rounded px-3 py-2" 
-      [ngModel]="selectedTime" 
+    <select
+      class="w-full border rounded px-3 py-2 bg-gray-700 text-gray-300 border-white"
+      [ngModel]="selectedTime"
       (ngModelChange)="onTimeChange($event)"
     >
       <option *ngFor="let time of allowedTimes" [value]="time">
@@ -16,7 +24,7 @@ import { FormsModule } from '@angular/forms';
     </select>
   `,
   imports: [FormsModule, CommonModule],
-  standalone: true
+  standalone: true,
 })
 export class TimePickerComponent implements OnInit, OnChanges {
   // The minimum time (in "HH:mm" format) from which to start listing times

@@ -1,55 +1,104 @@
-<div class="flex justify-center">
-    <div class="relative container w-3/5 h-2/4 bg-white shadow-2xl text-black rounded-lg min-h-[50vh] p-6">
-      <h2 class="text-center text-xl mb-4">Criar Nova Reserva</h2>
-      <form (ngSubmit)="createReserva()">
-        <!-- Mesa Selection -->
-        <div class="mb-4">
-          <label for="mesa" class="block mb-1">Mesa</label>
-          <select (change)="handleSelectMesa($event)" id="mesa" name="mesa" class="w-full border rounded px-3 py-2" required>
-            <option value="" disabled selected>Selecione uma mesa</option>
-            <option *ngFor="let mesa of mesas">{{ mesa.id }}</option>
+<div class="shadow-2xl relative overflow-x-auto rounded-lg w-1/2 mx-auto mt-10">
+  <div
+    class="w-full text-sm text-left rtl:text-right bg-gray-700 min-h-[50vh] text-gray-100 dark:text-white shadow-2xl flex flex-col"
+  >
+    <h2 class="font-semibold text-center text-2xl my-4">Criar Nova Reserva</h2>
+    <form (ngSubmit)="createReserva()">
+      <!-- Mesa Selection -->
+      <div class="flex mb-4">
+        <div class="mb-4 p-4 w-1/2  ">
+          <label for="mesa" class="block mb-1 text-lg font-semibold"
+            >Mesa</label
+          >
+          <select
+            (change)="handleSelectMesa($event)"
+            id="mesa" 
+            name="mesa"
+            class="w-full bg-gray-700 border rounded px-3 py-2"
+            required
+          >
+            <option
+              class="text-white disabled:text-white"
+              value=""
+              disabled
+              selected
+            >
+              Selecione uma mesa
+            </option>
+            <option class="text-white" *ngFor="let mesa of mesas">
+              {{ mesa.id }}
+            </option>
           </select>
         </div>
-  
+
         <!-- Day Selection -->
-        <div class="mb-4 w-2/3">
-          <label for="dataReserva" class="block mb-1">Selecione o Dia</label>
-          <input
-            type="date"
-            id="dataReserva"
-            name="dataReserva"
-            class="w-full border rounded px-3 py-2"
-            [min]="today"
-            (change)="onDateChange($event)"
-            required
-          />
-        </div>
-  
-        <!-- Time Selection (only visible after a day is selected) -->
+        <div class="mb-4 p-4 w-1/2">
+          <label for="dataReserva" class="block mb-1 text-lg font-semibold">Selecione o Dia</label>
+          <div class="relative">
+            <!-- Clickable Calendar Icon -->
+            <button
+              type="button"
+              (click)="openCalendar()"
+              class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white z-10"
+            >
+              <svg
+                class="w-full h-full"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </button>
         
-        <div *ngIf="selectedDate" class="flex justify-start">
-            <div class="mb-4 mr-3 w-1/3">
-              <label for="horaInico" class="block mb-1">Hora Início</label>
-              <app-custom-time-picker
-                [minTime]="'00:00'"
-                (timeChange)="onHoraInicioChange($event)">
-              </app-custom-time-picker>
-            </div>
-            <div class="mb-4 w-1/3 ml-2">
-              <label for="horaFim" class="block mb-1">Hora Fim</label>
-              <app-custom-time-picker
-                [minTime]="horaInicio"
-                (timeChange)="onHoraFimChange($event)">
-              </app-custom-time-picker>
-            </div>
+            <!-- Date Input -->
+            <input
+              #dateInputRef
+              type="date"
+              id="dataReserva"
+              name="dataReserva"
+              class="w-full border rounded px-3 py-2 pl-10 bg-gray-700 text-white appearance-none"
+              [min]="today"
+              (change)="onDateChange($event)"
+              required
+            />
           </div>
-  
-        <div class="absolute bottom-0 left-0 w-full flex justify-center pb-4">
-            <button type="submit" class="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded">
-            Criar Reserva
-          </button>
         </div>
-      </form>
-    </div>
+              
+        
+      </div>
+
+      <!-- Time Selection (only visible after a day is selected) -->
+
+      <div *ngIf="selectedDate" class="flex justify-center">
+        <div class="mb-4 mr-3 w-1/3">
+          <label for="horaInico" class="block mb-1">Hora Início</label>
+          <app-custom-time-picker
+            [minTime]="'00:00'"
+            (timeChange)="onHoraInicioChange($event)"
+          >
+          </app-custom-time-picker>
+        </div>
+        <div class="mb-4 w-1/3 ml-2">
+          <label for="horaFim" class="block mb-1">Hora Fim</label>
+          <app-custom-time-picker
+            [minTime]="horaInicio"
+            (timeChange)="onHoraFimChange($event)"
+          >
+          </app-custom-time-picker>
+        </div>
+      </div>
+
+      <div class="absolute bottom-0 left-0 w-full flex justify-center pb-4">
+        <button
+          type="submit"
+          class="cursor-pointer bg-blue-500 text-white px-6 py-4 text-xl font-semibold rounded"
+        >
+          Criar Reserva
+        </button>
+      </div>
+    </form>
   </div>
-  
+</div>

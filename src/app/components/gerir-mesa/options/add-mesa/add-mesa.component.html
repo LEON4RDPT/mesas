@@ -1,0 +1,65 @@
+<div class="flex flex-col items-center p-6  rounded-lg  text-white">
+    <h1 class="text-2xl font-semibold mb-4">Criar Mesa</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-full max-w-md space-y-4">
+
+        <!-- Limite de Tempo (Minutos) -->
+        <div>
+            <label for="limiteTempoMin" class="block text-sm font-medium">Limite de Tempo (Minutos)</label>
+            <input
+                formControlName="tempo"
+                id="limiteTempoMin"
+                type="number"
+                class="w-full mt-1 p-2 bg-gray-800 text-white rounded border border-gray-600"
+                placeholder="Digite o limite de tempo"
+            />
+        </div>
+
+        <!-- Local X / Y -->
+        <div class="grid grid-cols-2">
+            <div>
+                <label for="localX" class="block text-sm font-medium">Local X</label>
+                <input
+                    formControlName="localX"
+                    id="localX"
+                    type="number"
+                    class="w-full mt-1 p-2 bg-gray-800 text-white rounded border border-gray-600"
+                    placeholder="Digite a posição X"
+                />
+            </div>
+            <div>
+                <label for="localY" class="block text-sm font-medium">Local Y</label>
+                <input
+                    formControlName="localY"
+                    id="localY"
+                    type="number"
+                    class="w-full mt-1 p-2 bg-gray-800 text-white rounded border border-gray-600"
+                    placeholder="Digite a posição Y"
+                />
+            </div>
+        </div>
+        <!-- Capacidade de Usuários -->
+        <div>
+            <label for="CapacidadeUsers" class="block text-sm font-medium">Capacidade de Utilizadores</label>
+            <input
+                formControlName="cap"
+                id="CapacidadeUsers"
+                type="number"
+                class="w-full mt-1 p-2 bg-gray-800 text-white rounded border border-gray-600"
+                placeholder="Digite a capacidade de utilizadores"
+            />
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+            <button
+                type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded"
+            >
+                Criar Mesa
+            </button>
+        </div>
+        <div>
+            <h1>* A localização tem de ser unica!</h1>
+        </div>
+    </form>
+</div>
