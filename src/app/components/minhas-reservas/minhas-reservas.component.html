@@ -1,0 +1,54 @@
+<div class="flex justify-center">
+    <div
+      class="relative container w-3/5 h-3/4 bg-gray-700 shadow-2xl text-white rounded-lg min-h-[75vh]"
+    >
+      <div class="m-3 ">
+        <h1 class="text-center text-2xl font-semibold">Reservas de {{nome}}</h1>
+        <div class="mt-10">
+          <table class="min-w-full border-collapse">
+            <thead>
+              <tr class="bg-gray-700">
+                <th class="border px-4 py-2">Mesa</th>
+                <th class="border px-4 py-2">Data Inicio</th>
+                <th class="border px-4 py-2">Data Fim</th>
+                <th class="border px-4 py-2">Data Reserva</th>
+                <th class="border px-4 py-2">Ação</th>
+              </tr>
+            </thead>
+            <tbody class="text-center" *ngFor="let reserva of reservas">
+              <!-- Example row -->
+              <tr class="bg-gray-600">
+                <td class="border px-4 py-2">
+                  <button
+                    class="cursor-pointer text-white hover:underline focus:outline-none"
+                  >
+                    {{ reserva.mesa.id }}
+                  </button>
+                </td>
+                <td class="border px-4 py-2">
+                    {{ getFormattedTime(reserva.dataInicio) }}
+                </td>
+                <td class="border px-4 py-2">
+                    {{ getFormattedTime(reserva.dataFim) }}
+                </td>
+                <td class="border px-4 py-2">
+                    {{ getFormattedTime(reserva.dataReserva) }}
+                </td>              
+                <td class="border px-4 py-2">
+                    <button (click)="removeReserva(reserva.id)" class="bg-red-500 cursor-pointer hover:bg-red-600 text-white p-2 rounded-2xl ">Remover</button>
+                </td>
+              </tr>
+              <!-- Additional rows can be added here -->
+            </tbody>
+            <tr *ngIf="reservas.length === 0">
+                <td class="border px-4 py-2 text-center bg-gray-600" colspan="6">
+                  Nenhuma Reserva registada!
+                </td>
+              </tr>
+          </table>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  

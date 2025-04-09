@@ -1,62 +1,60 @@
 <div class="flex justify-center p-4">
-    <div class="w-full max-w-7xl bg-white shadow rounded-lg p-6">
-      <!-- Header -->
-      <h1 class="text-3xl font-bold text-gray-500 text-center mb-6">Estatísticas de Reservas</h1>
+  <div class="w-full max-w-7xl bg-gray-700 shadow-xl rounded-lg p-6">
+    <!-- Header -->
+    <h1 class="text-3xl font-semisemibold text-white text-center mb-6">Estatísticas de Reservas</h1>
+
+    <!-- Filter Section -->
+    <div class="flex flex-col md:flex-row md:justify-between items-start md:items-center mb-6 space-y-4 md:space-y-0">
+      <!-- Period Dropdown -->
+      <div class="flex items-center space-x-3">
+        <label class="text-white  font-semibold">Período:</label>
+        <select class="border border-gray-300 text-white bg-gray-600 rounded px-2 py-1" [(ngModel)]="periodoSelecionado"
+          (change)="onPeriodoChange(periodoSelecionado)">
+          <option value="dia">Dia</option>
+          <option value="semana">Semana</option>
+          <option value="mes">Mês</option>
+        </select>
+      </div>
+
       
-      <!-- Filter Section -->
-      <div class="flex flex-col md:flex-row md:justify-between items-start md:items-center mb-6 space-y-4 md:space-y-0">
-        <!-- Period Dropdown -->
-        <div class="flex items-center space-x-3">
-          <label class="text-black font-semibold">Período:</label>
-          <select class="border border-gray-300 text-gray-500 rounded px-2 py-1">
-            <option value="dia">Dia</option>
-            <option value="semana">Semana</option>
-            <option value="mes">Mês</option>
-          </select>
-        </div>
-        <!-- Date Range & Filter Button -->
-        <div class="flex flex-col md:flex-row items-start md:items-center space-y-3 md:space-y-0 md:space-x-4">
-          <div>
-            <label class="block text-black font-semibold">Data Inicial</label>
-            <input type="date" class="border border-gray-300 rounded px-2 py-1">
-          </div>
-          <div>
-            <label class="block text-black font-semibold">Data Final</label>
-            <input type="date" class="border border-gray-300 rounded px-2 py-1">
-          </div>
-          <button class="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-            Filtrar
-          </button>
-        </div>
+    </div>
+
+    <!-- Metrics Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div class="bg-green-500 text-white rounded-lg shadow p-4 ">
+        <h2 class="text-xl font-semibold">Total de Reservas</h2>
+        <p class="text-3xl mt-2">{{ reservasTotais }}</p>
       </div>
-  
-      <!-- Metrics Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div class="bg-green-500 text-white rounded-lg shadow p-4">
-          <h2 class="text-xl font-bold">Total de Reservas</h2>
-          <p class="text-3xl mt-2">120</p>
-        </div>
-        <div class="bg-yellow-500 text-white rounded-lg shadow p-4">
-          <h2 class="text-xl font-bold">Reservas Hoje</h2>
-          <p class="text-3xl mt-2">15</p>
-        </div>
-      </div>
-  
-      <!-- Charts Section -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-gray-100 rounded-lg p-4 shadow">
-          <h2 class="text-xl font-bold text-gray-500 mb-4">Gráfico: Reservas por Período</h2>
-          <div class="h-64 flex items-center justify-center text-black">
-            [Gráfico 1]
-          </div>
-        </div>
-        <div class="bg-gray-100 rounded-lg p-4 shadow">
-          <h2 class="text-xl font-bold text-gray-500 mb-4">Gráfico: Reservas por Mesa</h2>
-          <div class="h-64 flex items-center justify-center text-black">
-            [Gráfico 2]
-          </div>
-        </div>
+      <div class="bg-yellow-500 text-white rounded-lg shadow p-4">
+        <h2 class="text-xl font-semibold">Reservas Hoje</h2>
+        <p class="text-3xl mt-2">{{ reservasHoje }}</p>
       </div>
     </div>
+
+    <!-- Tabela de Reservas -->
+<div class="mt-8">
+  <h2 class="text-xl font-semibold text-white mb-4">Reservas no Período Selecionado</h2>
+  <div class="overflow-x-auto">
+    <table class="min-w-full  border border-gray-200 rounded shadow">
+      <thead class="bg-gray-600 text-white ">
+        <tr>
+          <th class="text-left px-4 py-2 border border-gray-400">Cliente</th>
+          <th class="text-left px-4 py-2 border border-gray-400">Mesa</th>
+          <th class="text-left px-4 py-2 border border-gray-400">Data</th>
+          <th class="text-left px-4 py-2 border border-gray-400">Início</th>
+          <th class="text-left px-4 py-2 border border-gray-400">Fim</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reserva of reservasPeriodo" class="">
+          <td class="px-4 py-2 border border-gray-400 text-white">{{ reserva.user.name }}</td>
+          <td class="px-4 py-2 border border-gray-400 text-white">{{ reserva.mesa.id }}</td>
+          <td class="px-4 py-2 border border-gray-400 *:text-white">{{ reserva.dataReserva | date:'shortDate' }}</td>
+          <td class="px-4 py-2 border border-gray-400 text-white">{{ reserva.dataInicio | date:'shortTime' }}</td>
+          <td class="px-4 py-2 border border-gray-400 text-white">{{ reserva.dataFim | date:'shortTime' }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
+</div>
+</div>

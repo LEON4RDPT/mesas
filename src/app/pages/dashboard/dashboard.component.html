@@ -74,6 +74,7 @@
         </li>
         <li>
           <button
+            *ngIf="isAdmin"
             (click)="selectedPage = 5"
             [ngClass]="{
               'bg-gray-700 text-white rounded-xl': selectedPage === 5,
@@ -84,20 +85,27 @@
             Gerir Mesas
           </button>
         </li>
+        <li>
+          <button
+            (click)="selectedPage = 6"
+            [ngClass]="{
+              'bg-gray-700 text-white rounded-xl': selectedPage === 6,
+              'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 6
+            }"
+            class="cursor-pointer w-full text-left block p-2 text-gray-200"
+          >
+            Minhas Reservas
+          </button>
+        </li>
       </ul>
-      <div class="flex space-x-4 mt-4">
+      <div class="flex space-x-4 mt-4 px-10 ">
         <button
           (click)="logout()"
           class="bg-red-600 text-white w-full py-2 rounded-lg hover:bg-red-700 shadow-xl"
         >
           Sair
         </button>
-        <button
-          (click)="settings()"
-          class="bg-gray-700 text-white w-full py-2 rounded-lg hover:bg-gray-800 shadow-xl"
-        >
-          Configurações
-        </button>
+
       </div>
     </aside>
 
@@ -118,6 +126,7 @@
         <ng-container *ngIf="isAdmin">
           <app-gerir-mesa *ngSwitchCase="5"></app-gerir-mesa>
         </ng-container>
+        <app-minhas-reservas [userId]="userData?.id ?? 0" *ngSwitchCase="6"></app-minhas-reservas>
         <div
           *ngSwitchDefault
           class="justify-center items-center flex text-3xl font-semibold"

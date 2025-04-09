@@ -12,10 +12,11 @@ import { User } from '../../interfaces/users';
 import { UserService } from '../../services/user.service';
 import { LoaderComponent } from "../../components/loader/loader.component";
 import { GerirMesaComponent } from '../../components/gerir-mesa/gerir-mesa.component';
+import { MinhasReservasComponent } from "../../components/minhas-reservas/minhas-reservas.component";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [UtilizadoresComponent, CommonModule, CalendarioComponent, AddReservaComponent, MesasComponent, StatisticsComponent, LoaderComponent, GerirMesaComponent],
+  imports: [UtilizadoresComponent, CommonModule, CalendarioComponent, AddReservaComponent, MesasComponent, StatisticsComponent, LoaderComponent, GerirMesaComponent, MinhasReservasComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
