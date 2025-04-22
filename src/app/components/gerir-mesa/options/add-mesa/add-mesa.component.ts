@@ -41,8 +41,8 @@ export class AddMesaComponent {
       id: 0,
       localX: localX, 
       localY: localY,
-      capacidadeUsers: cap,
-      limiteTempoMin: tempo,
+      capUsers: cap,
+      timeLimit: tempo,
       ativo: true
     }
     this.mesasService.postMesa(mesa).subscribe({

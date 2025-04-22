@@ -25,7 +25,7 @@ export class RemoveMesaComponent implements OnInit {
   ngOnInit(): void {
     this.mesaService.getAllMesas().subscribe({
       next: (value) => {
-        this.mesas = value.body ?? [];
+        this.mesas = value.body?.mesas ?? [];
       },
       error: (value) => {
         console.log(value);

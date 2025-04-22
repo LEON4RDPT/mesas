@@ -34,7 +34,7 @@ export class ChangeMesaComponent implements OnInit {
   // Load mesas from the service
   loadMesas(): void {
     this.mesaService.getAllMesas().subscribe((mesas) => {
-      this.mesas = mesas.body || [];
+      this.mesas = mesas.body?.mesas || [];
     });
   }
 
@@ -46,10 +46,10 @@ export class ChangeMesaComponent implements OnInit {
       console.log('Selected Mesa:', selectedMesa); // Debugging
       if (selectedMesa) {
         this.changeForm.patchValue({
-          tempo: selectedMesa.limiteTempoMin,
+          tempo: selectedMesa.timeLimit,
           localX: selectedMesa.localX,
           localY: selectedMesa.localY,
-          cap: selectedMesa.capacidadeUsers,
+          cap: selectedMesa.capUsers,
         });
       }
     }
@@ -60,10 +60,10 @@ export class ChangeMesaComponent implements OnInit {
       const updatedMesa: Mesa = {
         id: Number(this.selectedMesaId),
         ativo: true,
-        limiteTempoMin: this.changeForm.value.tempo,
+        timeLimit: this.changeForm.value.tempo,
         localX: this.changeForm.value.localX,
         localY: this.changeForm.value.localY,
-        capacidadeUsers: this.changeForm.value.cap
+        capUsers: this.changeForm.value.cap
       };
       console.log(updatedMesa);
 

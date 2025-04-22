@@ -1,8 +1,11 @@
 export interface Mesa {
     id: number,
-    limiteTempoMin: number,
+    timeLimit: number,
     localX: number,
     localY: number,
-    capacidadeUsers: number,
+    capUsers: number,
     ativo: boolean
+}
+export interface MesaGetAll {
+    mesas: Mesa[]
 }

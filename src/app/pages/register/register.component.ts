@@ -1,29 +1,49 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NavbarComponent } from "../../components/navbar/navbar.component";
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { UserWithPassword } from '../../interfaces/users';
 import { AuthService } from '../../services/auth.service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { MatButton } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-register',
-  imports: [CommonModule,NavbarComponent  ,ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    NavbarComponent,
+    ReactiveFormsModule,
+    MatButton,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  
   registerForm: FormGroup;
   passwordsDoNotMatch: boolean = false;
 
-  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService) {
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private authService: AuthService
+  ) {
     // Initialize the form with validation rules
     this.registerForm = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      repPassword: ['', [Validators.required]]
+      repPassword: ['', [Validators.required]],
     });
   }
 
@@ -40,26 +60,29 @@ export class RegisterComponent {
       this.passwordsDoNotMatch = false;
       console.log('Form submitted successfully:', this.registerForm.value);
       const user: UserWithPassword = {
-        id: 0, name: this.registerForm.value.nome, password: this.registerForm.value.password, email: this.registerForm.value.email,
-        isAdmin: false
-      }
+        id: 0,
+        name: this.registerForm.value.nome,
+        password: this.registerForm.value.password,
+        email: this.registerForm.value.email,
+        isAdmin: false,
+      };
       this.authService.register(user).subscribe({
         next: (response) => {
           if (response.ok) {
-            alert("Registado com sucesso!");
-            this.router.navigate(['/login'])
+            alert('Registado com sucesso!');
+            this.router.navigate(['/login']);
           }
         },
-        error:(error) => {
+        error: (error) => {
           if (error.status === 400) {
-            alert("dados Inválidos!")
+            alert('dados Inválidos!');
           } else if (error.status === 409) {
-            alert("Email já existente!");
+            alert('Email já existente!');
           } else {
-            alert("Erro no Servidor!");
+            alert('Erro no Servidor!');
           }
-        }
-      })
+        },
+      });
     } else {
       console.log('Form is invalid');
     }

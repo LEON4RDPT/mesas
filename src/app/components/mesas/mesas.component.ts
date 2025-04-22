@@ -22,7 +22,7 @@ export class MesasComponent implements OnInit {
     //todo get mesas
     this.mesasService.getAllMesas().subscribe({
       next:(response) => {
-        this.mesas = response.body ?? []
+        this.mesas = response.body?.mesas ?? []
 
         this.maxX = Math.max(...this.mesas.map(m => m.localX), 0);
         this.maxY = Math.max(...this.mesas.map(m => m.localY), 0);

@@ -1,7 +1,8 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Mesa } from '../interfaces/mesas';
+import { Mesa, MesaGetAll } from '../interfaces/mesas';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +11,20 @@ export class MesasService {
 
 
   constructor(private httpClient: HttpClient) { }
-  readonly url = 'https://localhost:7107/api'
+  readonly url = environment.url;
 
   updateMesa(mesa: Mesa): Observable<HttpResponse<any>> {
-    return this.httpClient.put(this.url +"/Mesas/" + mesa.id, mesa, {observe: 'response'})
+    return this.httpClient.put(this.url +"/mesa/" + mesa.id, mesa, {observe: 'response'})
   }
 
   postMesa(mesa: Mesa): Observable<HttpResponse<Mesa>> {
-    return this.httpClient.post<Mesa>(this.url+ "/Mesas",mesa,{observe: 'response'})
+    return this.httpClient.post<Mesa>(this.url+ "/mesa",mesa,{observe: 'response'})
   }
-  getAllMesas(): Observable<HttpResponse<Mesa[]>> {
-    return this.httpClient.get<Mesa[]>(this.url + "/Mesas",{observe: 'response'})
+
+  getAllMesas(): Observable<HttpResponse<MesaGetAll>> {
+    return this.httpClient.get<MesaGetAll>(this.url + "/mesa",{observe: 'response'});
   }
   deleteMesa(id: number): Observable<HttpResponse<any>> {
-    return this.httpClient.delete<any>(this.url+'/Mesas/' + id,{observe: 'response'})
+    return this.httpClient.delete<any>(this.url+'/mesa/' + id,{observe: 'response'})
   }
 }

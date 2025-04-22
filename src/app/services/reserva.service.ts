@@ -2,6 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Reserva, ReservaPost } from '../interfaces/reservas';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,19 +10,19 @@ import { Observable } from 'rxjs';
 export class ReservaService {
 
   constructor(private httpClient: HttpClient) { }
-  readonly url = 'https://localhost:7107/api'
+  readonly url = environment.url
 
   postReserva(reserva: ReservaPost): Observable<HttpResponse<Reserva>> {
-    return this.httpClient.post<Reserva>(this.url + "/Reservas", reserva,{observe: 'response'})
+    return this.httpClient.post<Reserva>(this.url + "/reserva", reserva,{observe: 'response'})
   }
 
   getAllReservas(userId?: number): Observable<HttpResponse<Reserva[]>> {
-    if (!userId) return this.httpClient.get<Reserva[]>(this.url+"/Reservas",{observe: 'response'})
-    return this.httpClient.get<Reserva[]>(this.url+"/Reservas/" + userId,{observe: 'response'})
+    if (!userId) return this.httpClient.get<Reserva[]>(this.url+"/reserva",{observe: 'response'})
+    return this.httpClient.get<Reserva[]>(this.url+"/reserva/" + userId,{observe: 'response'})
   }
 
   deleteReserva(id: number): Observable<HttpResponse<any>>{
-    return this.httpClient.delete<any>(this.url+ "/Reservas/" + id, {observe: 'response'})
+    return this.httpClient.delete<any>(this.url+ "/reserva/" + id, {observe: 'response'})
   }
 
 

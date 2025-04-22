@@ -108,7 +108,7 @@ export class AddReservaComponent implements OnInit {
   ngOnInit(): void {
     this.mesasService.getAllMesas().subscribe({
       next: (response) => {
-          this.mesas = response.body?.filter((element) => element.ativo === true) || [];
+          this.mesas = response.body?.mesas?.filter((element) => element.ativo === true) || [];
       },
     });
   }
