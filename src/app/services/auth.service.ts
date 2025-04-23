@@ -14,7 +14,7 @@ export class AuthService {
   readonly url = environment.url;
 
   register(userWithPassword: UserWithPassword): Observable<HttpResponse<any>> {
-    return this.httpClient.post<any>(this.url + "/user", userWithPassword, { observe: 'response' });
+    return this.httpClient.post<any>(this.url + "/user/", userWithPassword, { observe: 'response' });
   }
 
   login(user: UserLogin): Observable <HttpResponse<any>> {

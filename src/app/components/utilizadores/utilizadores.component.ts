@@ -60,7 +60,7 @@ export class UtilizadoresComponent implements OnInit {
       return;
     }
     this.selectedUser.password = this.newPasswordForUser;
-    this.userService.putUser(this.selectedUser?.id || 0, this.selectedUser).subscribe({
+    this.userService.putUser(this.selectedUser).subscribe({
       next:(response) => {
         if (response) {
           alert("Utilizador alterado com sucesso!");

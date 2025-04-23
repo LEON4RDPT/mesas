@@ -20,8 +20,8 @@ export class UserService {
     return this.httpClient.get<UserWithPassword>(this.url + "/user/" + id, { observe: 'response' })
   }
 
-  putUser(id:number, user: UserWithPassword) {
-    return this.httpClient.put<UserWithPassword>(this.url + "/user" + id, user ,{observe: 'response'})
+  putUser(user: UserWithPassword) {
+    return this.httpClient.put<UserWithPassword>(this.url + "/user/", user ,{observe: 'response'})
   }
   deleteUser(id:number) {
     return this.httpClient.delete(this.url + "/user/" + id,{observe: 'response'})

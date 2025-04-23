@@ -1,6 +1,6 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Reserva, ReservaPost } from '../interfaces/reservas';
+import { Reserva, ReservaPost, ReservaResponse } from '../interfaces/reservas';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -16,13 +16,13 @@ export class ReservaService {
     return this.httpClient.post<Reserva>(this.url + "/reserva", reserva,{observe: 'response'})
   }
 
-  getAllReservas(userId?: number): Observable<HttpResponse<Reserva[]>> {
-    if (!userId) return this.httpClient.get<Reserva[]>(this.url+"/reserva",{observe: 'response'})
-    return this.httpClient.get<Reserva[]>(this.url+"/reserva/" + userId,{observe: 'response'})
+  getAllReservas(userId?: number): Observable<HttpResponse<ReservaResponse>> {
+    if (!userId) return this.httpClient.get<ReservaResponse>(this.url+"/reserva",{observe: 'response'})
+    return this.httpClient.get<ReservaResponse>(this.url+"/reserva/" + userId,{observe: 'response'})
   }
   getAllReservasUser(userId?: number): Observable<HttpResponse<any>> {
-    if (!userId) return this.httpClient.get<Reserva[]>(this.url+"/reserva",{observe: 'response'})
-    return this.httpClient.get<Reserva[]>(this.url+"/reserva/user/" + userId,{observe: 'response'})
+    if (!userId) return this.httpClient.get<ReservaResponse>(this.url+"/reserva",{observe: 'response'})
+    return this.httpClient.get<ReservaResponse>(this.url+"/reserva/user/" + userId,{observe: 'response'})
   }
 
 

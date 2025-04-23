@@ -56,7 +56,7 @@ export class CalendarioComponent implements OnInit {
     this.loadDay(this.thisDate);
     this.reservaService.getAllReservas().subscribe({
       next: (value) => {
-        this.reservas = value.body || [];
+        this.reservas = value.body?.reservas || [];
         console.log(value);
       },
       error: (error) => {

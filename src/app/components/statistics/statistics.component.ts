@@ -35,24 +35,24 @@ export class StatisticsComponent implements OnInit {
 
   carregarDadosIniciais(): void {
     this.statisticsService.getTodas().subscribe(res => {
-      this.reservasTotais = res.body?.length ?? 0;
+      this.reservasTotais = res.body?.reservas.length ?? 0;
     });
 
     this.statisticsService.getHoje().subscribe(res => {
-      this.reservasHoje = res.body?.length ?? 0;
+      this.reservasHoje = res.body?.reservas.length ?? 0;
     });
   }
 
   onPeriodoChange(periodo: string): void {
     switch (periodo) {
       case 'dia':
-        this.statisticsService.getHoje().subscribe(data => this.reservasPeriodo = data.body ?? []);
+        this.statisticsService.getHoje().subscribe(data => this.reservasPeriodo = data.body?.reservas ?? []);
         break;
       case 'semana':
-        this.statisticsService.getSemana().subscribe(data => this.reservasPeriodo = data.body ?? []);
+        this.statisticsService.getSemana().subscribe(data => this.reservasPeriodo = data.body?.reservas ?? []);
         break;
       case 'mes':
-        this.statisticsService.getMes().subscribe(data => this.reservasPeriodo = data.body ?? []);
+        this.statisticsService.getMes().subscribe(data => this.reservasPeriodo = data.body?.reservas ?? []);
         break;
     }
   }

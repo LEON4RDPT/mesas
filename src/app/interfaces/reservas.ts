@@ -17,3 +17,7 @@ export interface ReservaPost {
     dataInicio: string;
     dataFim: string;
   }
+
+  export interface ReservaResponse {
+    reservas: Reserva[]
+  }
