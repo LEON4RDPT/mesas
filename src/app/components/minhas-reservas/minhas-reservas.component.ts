@@ -26,9 +26,9 @@ export class MinhasReservasComponent implements OnInit {
       }
     })
 
-    this.reservaService.getAllReservas(this.userId).subscribe({
+    this.reservaService.getAllReservasUser(this.userId).subscribe({
       next: (value) => {
-        this.reservas = value.body || []
+        this.reservas = value.body.reservas || []
       }
     })
   }

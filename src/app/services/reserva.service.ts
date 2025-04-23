@@ -20,6 +20,11 @@ export class ReservaService {
     if (!userId) return this.httpClient.get<Reserva[]>(this.url+"/reserva",{observe: 'response'})
     return this.httpClient.get<Reserva[]>(this.url+"/reserva/" + userId,{observe: 'response'})
   }
+  getAllReservasUser(userId?: number): Observable<HttpResponse<any>> {
+    if (!userId) return this.httpClient.get<Reserva[]>(this.url+"/reserva",{observe: 'response'})
+    return this.httpClient.get<Reserva[]>(this.url+"/reserva/user/" + userId,{observe: 'response'})
+  }
+
 
   deleteReserva(id: number): Observable<HttpResponse<any>>{
     return this.httpClient.delete<any>(this.url+ "/reserva/" + id, {observe: 'response'})
