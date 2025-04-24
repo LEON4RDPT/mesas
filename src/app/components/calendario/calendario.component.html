@@ -1,16 +1,16 @@
 <div class="flex justify-center">
   <div
-    class="relative container w-3/5 h-3/4 bg-gray-700 shadow-2xl text-white rounded-lg min-h-[75vh]"
+    class="relative container w-3/5 h-3/4 bg-gray-300 shadow-2xl text-white rounded-lg min-h-[75vh]"
   >
     <div class="m-3 ">
-      <h1 class="text-center text-2xl font-semibold">Tabela Reservas (Dia)</h1>
+      <h1 class="text-center text-2xl font-semibold text-black">Tabela Reservas (Dia)</h1>
       <div class="mb-4 p-4 w-1/3">
-        <label for="dataReserva" class="block mb-1 text-lg font-semibold">Selecione o Dia</label>
+        <label for="dataReserva" class="block mb-1 text-lg font-semibold text-black">Selecione o Dia</label>
         <div class="relative">
           <button
             type="button"
             (click)="openCalendar()"
-            class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white z-10"
+            class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white z-10 "
           >
             <svg
               class="w-full h-full"
@@ -30,7 +30,7 @@
             type="date"
             id="dataReserva"
             name="dataReserva"
-            class="w-full border rounded px-3 py-2 pl-10 bg-gray-700 text-white appearance-none"
+            class="w-full border rounded px-3 py-2 pl-10 bg-gray-400 text-white appearance-none"
             [min]="thisDate"
             (change)="loadDay($event)"  
             [value]="thisDate"
@@ -41,7 +41,7 @@
       <div class="mt-10">
         <table class="min-w-full border-collapse">
           <thead>
-            <tr class="bg-gray-700">
+            <tr class="bg-gray-300 text-black">
               <th class="border px-4 py-2">User</th>
               <th class="border px-4 py-2">Mesa</th>
               <th class="border px-4 py-2">Data Inicio</th>
@@ -52,7 +52,7 @@
           </thead>
           <tbody class="text-center" *ngFor="let reserva of reservasSelected">
             <!-- Example row -->
-            <tr class="bg-gray-600">
+            <tr class="bg-gray-200">
               <td class="border px-4 py-2">
                 <button
                   class="cursor-pointer text-white hover:runderline focus:outline-none"
@@ -83,7 +83,7 @@
             <!-- Additional rows can be added here -->
           </tbody>
           <tr *ngIf="reservasSelected.length === 0">
-              <td class="border px-4 py-2 text-center bg-gray-600" colspan="6">
+              <td class="border px-4 py-2 text-center bg-gray-200 text-black" colspan="6">
                 Nenhuma Reserva agendada!
               </td>
             </tr>
