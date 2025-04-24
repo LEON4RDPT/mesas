@@ -1,32 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import { UtilizadoresComponent } from "../../components/utilizadores/utilizadores.component";
+import { UtilizadoresComponent } from '../../components/utilizadores/utilizadores.component';
 import { CommonModule } from '@angular/common';
-import { CalendarioComponent } from "../../components/calendario/calendario.component";
-import { AddReservaComponent } from "../../components/add-reserva/add-reserva.component";
-import { MesasComponent } from "../../components/mesas/mesas.component";
-import { StatisticsComponent } from "../../components/statistics/statistics.component";
+import { CalendarioComponent } from '../../components/calendario/calendario.component';
+import { AddReservaComponent } from '../../components/add-reserva/add-reserva.component';
+import { MesasComponent } from '../../components/mesas/mesas.component';
+import { StatisticsComponent } from '../../components/statistics/statistics.component';
 import { JwtService } from '../../services/jwt.service';
 import { CookieService } from '../../services/cookie.service';
 import { Router } from '@angular/router';
 import { User } from '../../interfaces/users';
 import { UserService } from '../../services/user.service';
-import { LoaderComponent } from "../../components/loader/loader.component";
+import { LoaderComponent } from '../../components/loader/loader.component';
 import { GerirMesaComponent } from '../../components/gerir-mesa/gerir-mesa.component';
-import { MinhasReservasComponent } from "../../components/minhas-reservas/minhas-reservas.component";
+import { MinhasReservasComponent } from '../../components/minhas-reservas/minhas-reservas.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [UtilizadoresComponent, CommonModule, CalendarioComponent, AddReservaComponent, MesasComponent, StatisticsComponent, LoaderComponent, GerirMesaComponent, MinhasReservasComponent],
+  imports: [
+    UtilizadoresComponent,
+    CommonModule,
+    CalendarioComponent,
+    AddReservaComponent,
+    MesasComponent,
+    StatisticsComponent,
+    LoaderComponent,
+    GerirMesaComponent,
+    MinhasReservasComponent,
+    MatToolbarModule,
+    MatListModule,
+    MatButtonModule,
+  ],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent implements OnInit {
-settings() {
-throw new Error('Method not implemented.');
-}
+  settings() {
+    throw new Error('Method not implemented.');
+  }
 
-
-  selectedPage: number| null = null;
+  selectedPage: number | null = null;
   userData: User | null = null;
   isLoading: boolean = false;
   isAdmin: boolean = false;
@@ -36,7 +51,12 @@ throw new Error('Method not implemented.');
   2 = Estatisticas
   3 = Utilizadores
   */
-  constructor (private router: Router, private jwt: JwtService, private cookie: CookieService, private userService: UserService) {}
+  constructor(
+    private router: Router,
+    private jwt: JwtService,
+    private cookie: CookieService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -51,24 +71,23 @@ throw new Error('Method not implemented.');
         this.userData = {
           name: response.body?.name,
           email: response.body?.email,
-          id: Number(id)
-        }
-        setTimeout(()=> {
-          this.isLoading=false;
-        }, 2000)
+          id: Number(id),
+        };
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 2000);
       },
       error: (error) => {
         console.log(error);
-
-      }
-    })
+      },
+    });
   }
   logout() {
-    const confirmation = confirm("Deseja sair da sua conta?");
+    const confirmation = confirm('Deseja sair da sua conta?');
     if (!confirmation) {
       return;
     }
-    this.cookie.deleteCookie('authToken')
-    this.router.navigate(["/"])
+    this.cookie.deleteCookie('authToken');
+    this.router.navigate(['/']);
   }
 }

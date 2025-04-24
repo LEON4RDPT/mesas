@@ -38,3 +38,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .custom-bg {
   background-color: rgba(0, 0, 0, 0.09);
 }
+
+/* Targeting the Material Raised Button with the 'warn' color */
+.mat-raised-button.mat-warn {
+  background-color: #f44336 !important; /* Red color */
+  color: white !important; /* Text color */
+  border-radius: 4px; /* Optional: keep rounded corners */
+}
+
+.mat-raised-button.mat-warn:hover {
+  background-color: #d32f2f !important; /* Darker red for hover */
+}

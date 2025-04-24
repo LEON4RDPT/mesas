@@ -4,113 +4,127 @@
 >
   <div class="flex flex-1">
     <!-- Sidebar -->
-    <aside class="w-1/6 bg-gray-600 p-4 flex flex-col justify-between">
-      <ul class="space-y-2">
-        <li>
-          <h1 class="text-2xl mb-5 font-semibold">Dashboard</h1>
-        </li>
-        <li>
-          <button
+    <aside class="w-1/6 bg-gray-300 p-4 flex flex-col justify-between">
+      <h1 class="text-3xl text-center  mb-6 mt-2 text-black">Dashboard</h1>
+      
+      <mat-list class="space-y-2 flex-1">
+        <mat-list-item>
+          <div
             (click)="selectedPage = 0"
             [ngClass]="{
-              'bg-gray-700 text-white rounded-xl': selectedPage === 0,
-              'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 0
+              'bg-gray-300 text-white rounded-3xl': selectedPage === 0,
+              'hover:bg-gray-300 hover:rounded-3xl': selectedPage !== 0
             }"
-            class="cursor-pointer w-full text-left block p-2 text-gray-200"
+            class="cursor-pointer w-full text-left text-gray-200"
           >
-            Mesas
-          </button>
-        </li>
-        <li>
-          <button
-            *ngIf="isAdmin"
+            <button mat-button class="w-full text-left">Mesas</button>
+          </div>
+        </mat-list-item>
+      
+        <mat-list-item *ngIf="isAdmin">
+          <div
             (click)="selectedPage = 1"
             [ngClass]="{
-              'bg-gray-700 text-white rounded-xl': selectedPage === 1,
-              'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 1
+              'bg-gray-300 text-white rounded-3xl': selectedPage === 1,
+              'hover:bg-gray-300 hover:rounded-3xl': selectedPage !== 1
             }"
-            class="cursor-pointer w-full text-left block p-2 text-gray-200"
+            class="cursor-pointer w-full text-left text-gray-200"
           >
-            Tabela Reservas
-          </button>
-        </li>
-        <li>
-          <button
-            *ngIf="isAdmin"
+            <button mat-button class="w-full text-left">Tabela Reservas</button>
+          </div>
+        </mat-list-item>
+      
+        <mat-list-item *ngIf="isAdmin">
+          <div
             (click)="selectedPage = 2"
             [ngClass]="{
-              'bg-gray-700 text-white rounded-xl': selectedPage === 2,
-              'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 2
+              'bg-gray-300 text-white rounded-3xl': selectedPage === 2,
+              'hover:bg-gray-300 hover:rounded-3xl': selectedPage !== 2
             }"
-            class="cursor-pointer w-full text-left block p-2 text-gray-200"
+            class="cursor-pointer w-full text-left text-gray-200"
           >
-            Estatisticas
-          </button>
-        </li>
-        <li>
-          <button
-            *ngIf="isAdmin"
+            <button mat-button class="w-full text-left">Estatísticas</button>
+          </div>
+        </mat-list-item>
+      
+        <mat-list-item *ngIf="isAdmin">
+          <div
             (click)="selectedPage = 3"
             [ngClass]="{
-              'bg-gray-700 text-white rounded-xl': selectedPage === 3,
-              'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 3
+              'bg-gray-300 text-white rounded-3xl': selectedPage === 3,
+              'hover:bg-gray-300 hover:rounded-3xl': selectedPage !== 3
             }"
-            class="cursor-pointer w-full text-left block p-2 text-gray-200"
+            class="cursor-pointer w-full text-left text-gray-200"
           >
-            Utilizadores
-          </button>
-        </li>
-        <li>
-          <button
+            <button mat-button class="w-full text-left">Utilizadores</button>
+          </div>
+        </mat-list-item>
+      
+        <mat-list-item>
+          <div
             (click)="selectedPage = 4"
             [ngClass]="{
-              'bg-gray-700 text-white rounded-xl': selectedPage === 4,
-              'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 4
+              'bg-gray-300 text-white rounded-3xl': selectedPage === 4,
+              'hover:bg-gray-300 hover:rounded-3xl': selectedPage !== 4
             }"
-            class="cursor-pointer w-full text-left block p-2 text-gray-200"
+            class="cursor-pointer w-full text-left text-gray-200"
           >
-            Nova Reserva
-          </button>
-        </li>
-        <li>
-          <button
-            *ngIf="isAdmin"
+            <button mat-button class="w-full text-left">Nova Reserva</button>
+          </div>
+        </mat-list-item>
+      
+        <mat-list-item *ngIf="isAdmin">
+          <div
             (click)="selectedPage = 5"
             [ngClass]="{
-              'bg-gray-700 text-white rounded-xl': selectedPage === 5,
-              'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 5
+              'bg-gray-300 text-white rounded-3xl': selectedPage === 5,
+              'hover:bg-gray-300 hover:rounded-3xl': selectedPage !== 5
             }"
-            class="cursor-pointer w-full text-left block p-2 text-gray-200"
+            class="cursor-pointer w-full text-left text-gray-200"
           >
-            Gerir Mesas
-          </button>
-        </li>
-        <li>
-          <button
+            <button mat-button class="w-full text-left">Gerir Mesas</button>
+          </div>
+        </mat-list-item>
+      
+        <mat-list-item>
+          <div
             (click)="selectedPage = 6"
             [ngClass]="{
-              'bg-gray-700 text-white rounded-xl': selectedPage === 6,
-              'hover:bg-gray-700 hover:rounded-xl': selectedPage !== 6
+              'bg-gray-300 text-white rounded-3xl': selectedPage === 6,
+              'hover:bg-gray-300 hover:rounded-3xl': selectedPage !== 6
             }"
-            class="cursor-pointer w-full text-left block p-2 text-gray-200"
+            class="cursor-pointer w-full text-left text-gray-200"
           >
-            Minhas Reservas
-          </button>
-        </li>
-      </ul>
-      <div class="flex space-x-4 mt-4 px-10 ">
+            <button mat-button class="w-full text-left">Minhas Reservas</button>
+          </div>
+        </mat-list-item>
+      </mat-list>
+      
+      
+      <div class="flex space-x-4 mt-4 px-10">
         <button
+          mat-raised-button
+          color="warn"
           (click)="logout()"
-          class="bg-red-600 text-white w-full py-2 rounded-lg hover:bg-red-700 shadow-xl"
+          class="w-1/2 py-2 rounded-lg shadow-xl"
         >
           Sair
         </button>
-
+      
+        <button
+          mat-raised-button
+          color="primary"
+          routerLink="/"
+          class="w-1/2 py-2 rounded-lg shadow-xl"
+        >
+          Menu Principal
+        </button>
       </div>
+      
     </aside>
 
     <!-- Main Content -->
-    <main class="w-5/6 bg-gray-500 p-6">
+    <main class="w-5/6 bg-gray-200 p-6">
       <div [ngSwitch]="selectedPage">
         <app-mesas *ngSwitchCase="0"></app-mesas>
         <ng-container *ngIf="isAdmin">
@@ -139,7 +153,7 @@
 </div>
 <div
   *ngIf="isLoading"
-  class="flex items-center justify-center h-screen bg-gray-100"
+  class="flex items-center justify-center h-screen bg-gray-200"
 >
   <app-loader></app-loader>
 </div>
