@@ -2,18 +2,21 @@
   <div
     class="container mt-10 w-3/5 h-3/4 bg-gray-300 text-white shadow-2xl rounded-lg min-h-[75vh] max-h-[75vh] p-6"
   >
-    <h1 class="text-center text-2xl font-semibold relative text-black">Mesas</h1>
+    <h1 class="text-center text-2xl font-semibold relative text-black">
+      Mesas
+    </h1>
     <!-- Grid Container for Mesa Cards -->
     <!-- Grid Scroll Wrapper -->
     <div
-      class="border border-gray-500 shadow-xl p-2 mt-10 bg-gray-200 rounded-lg max-h-[100vh] overflow-auto custom-scroll"
+      class="border border-gray-500 shadow-xl p-2 mt-10 bg-gray-200 rounded-lg"
     >
       <!-- Grid Container -->
       <div
-        class="grid gap-2"
+        class="grid gap-2 overflow-auto max-w-full max-h-[60vh] custom-scroll p-2"
         [style.display]="'grid'"
         [style.gridTemplateColumns]="'repeat(' + (maxX + 1) + ', 100px)'"
         [style.gridTemplateRows]="'repeat(' + (maxY + 1) + ', 100px)'"
+        style="width: 100%; height: 100%"
       >
         <div
           *ngFor="let mesa of mesas"

@@ -1,7 +1,7 @@
 <div class="flex justify-center p-4">
   <div class="w-full max-w-7xl bg-gray-300 shadow-xl rounded-lg p-6">
     <!-- Header -->
-    <h1 class="text-3xl font-semisemibold text-black text-center mb-6">Estatísticas de Reservas</h1>
+    <h1 class="text-3xl font-semisemibold text-black text-center font-semibold mb-6">Estatísticas de Reservas</h1>
 
     <!-- Filter Section -->
     <div class="flex flex-col md:flex-row md:justify-between items-start md:items-center mb-6 space-y-4 md:space-y-0">
@@ -47,11 +47,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let reserva of reservasPeriodo" class="">
-          <td class="px-4 py-2 border border-gray-400 text-white">{{ reserva.user.name }}</td>
-          <td class="px-4 py-2 border border-gray-400 text-white">{{ reserva.mesa.id }}</td>
-          <td class="px-4 py-2 border border-gray-400 *:text-white">{{ reserva.dataReserva | date:'shortDate' }}</td>
-          <td class="px-4 py-2 border border-gray-400 text-white">{{ reserva.dataInicio | date:'shortTime' }}</td>
-          <td class="px-4 py-2 border border-gray-400 text-white">{{ reserva.dataFim | date:'shortTime' }}</td>
+          <td class="px-4 py-2 border border-gray-400 text-black">{{ reserva.user.name }}</td>
+          <td class="px-4 py-2 border border-gray-400 text-black">{{ reserva.mesa.id }}</td>
+          <td class="px-4 py-2 border border-gray-400 text-black">{{ reserva.dataReserva | date:'shortDate' }}</td>
+          <td class="px-4 py-2 border border-gray-400 text-black">{{ reserva.dataInicio | date:'shortTime' }}</td>
+          <td class="px-4 py-2 border border-gray-400 text-black">{{ reserva.dataFim | date:'shortTime' }}</td>
         </tr>
       </tbody>
     </table>

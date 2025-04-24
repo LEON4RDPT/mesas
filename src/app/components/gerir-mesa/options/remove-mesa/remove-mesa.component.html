@@ -1,38 +1,41 @@
-<div *ngIf="isLoading" class="mt-5 flex items-center justify-center h-full">
-    <div class="text-center">
-        <app-loader [mode]="'WHITE'"></app-loader>
-    </div>
-</div>
-
-<div *ngIf="!isLoading" class="mt-5 flex flex-col items-center space-y-4">
-    <!-- Combobox -->
+<div class="mt-5 flex flex-col items-center space-y-4">
+    <!-- Combobox (Material Select) -->
     <div class="w-full max-w-md">
-        <label for="mesaSelect" class="block text-xl font-medium text-white mb-2">Selecione uma Mesa</label>
-        <select
-            id="mesaSelect"
-            [(ngModel)]="selectedMesaId"
-            (change)="onMesaSelect()"
-            class="w-full p-2 bg-gray-700 text-white rounded border border-gray-600"
+      <mat-form-field class="w-full">
+        <mat-label>Selecione uma Mesa</mat-label>
+        <mat-select
+          [(ngModel)]="selectedMesaId"
+          (selectionChange)="onMesaSelect()"
+          id="mesaSelect"
+          class=" text-white"
         >
-            <option *ngFor="let mesa of mesas" [value]="mesa.id">
-                Mesa {{ mesa.id }} - {{ mesa.ativo ? 'Ativo' : 'Inativo' }}
-            </option>
-        </select>
-    </div>  
-
-    <!-- Desativar Button -->
-    <button 
+          <mat-option *ngFor="let mesa of mesas" [value]="mesa.id">
+            Mesa {{ mesa.id }} - {{ mesa.ativo ? 'Ativo' : 'Inativo' }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  
+    <!-- Desativar / Ativar Button -->
+    <div class="flex space-x-4">
+      <button
         *ngIf="selectedMesaIsActive"
-        class="bg-red-600 text-white py-2 px-4 rounded size-1/5 text-2xl   hover:bg-red-700"
+        mat-raised-button
+        color="warn"
+        class="text-2xl py-2 px-4"
         (click)="handleDesativarMesa()"
-    >
+      >
         Desativar
-    </button>
-    <button 
+      </button>
+      <button
         *ngIf="!selectedMesaIsActive"
-        class="bg-green-600 text-white py-2 px-4 rounded size-1/5 text-2xl   hover:bg-green-700"
+        mat-raised-button
+        color="primary"
+        class="text-2xl py-2 px-4"
         (click)="handleAtivarMesa()"
-    >
+      >
         Ativar
-    </button>
-</div>
+      </button>
+    </div>
+  </div>
+  

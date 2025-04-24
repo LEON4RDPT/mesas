@@ -18,14 +18,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .custom-scroll::-webkit-scrollbar-track {
-  background: #2d3748;
+  background: white;
   border-radius: 8px;
 }
 
 .custom-scroll::-webkit-scrollbar-thumb {
   background: #4c51bf;
   border-radius: 8px;
-  border: 2px solid #2d3748;
+  border: 2px solid gray;
 }
 
 .custom-scroll::-webkit-scrollbar-thumb:hover {
