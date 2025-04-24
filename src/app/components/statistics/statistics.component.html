@@ -1,14 +1,14 @@
 <div class="flex justify-center p-4">
-  <div class="w-full max-w-7xl bg-gray-700 shadow-xl rounded-lg p-6">
+  <div class="w-full max-w-7xl bg-gray-300 shadow-xl rounded-lg p-6">
     <!-- Header -->
-    <h1 class="text-3xl font-semisemibold text-white text-center mb-6">Estatísticas de Reservas</h1>
+    <h1 class="text-3xl font-semisemibold text-black text-center mb-6">Estatísticas de Reservas</h1>
 
     <!-- Filter Section -->
     <div class="flex flex-col md:flex-row md:justify-between items-start md:items-center mb-6 space-y-4 md:space-y-0">
       <!-- Period Dropdown -->
       <div class="flex items-center space-x-3">
-        <label class="text-white  font-semibold">Período:</label>
-        <select class="border border-gray-300 text-white bg-gray-600 rounded px-2 py-1" [(ngModel)]="periodoSelecionado"
+        <label class="text-black  font-semibold">Período:</label>
+        <select class="border border-gray-400 text-black bg-gray-300 rounded px-2 py-1" [(ngModel)]="periodoSelecionado"
           (change)="onPeriodoChange(periodoSelecionado)">
           <option value="dia">Dia</option>
           <option value="semana">Semana</option>
@@ -21,11 +21,11 @@
 
     <!-- Metrics Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-      <div class="bg-green-500 text-white rounded-lg shadow p-4 ">
+      <div class="bg-violet-700 text-white rounded-lg shadow p-4 ">
         <h2 class="text-xl font-semibold">Total de Reservas</h2>
         <p class="text-3xl mt-2">{{ reservasTotais }}</p>
       </div>
-      <div class="bg-yellow-500 text-white rounded-lg shadow p-4">
+      <div class="bg-purple-500 text-white rounded-lg shadow p-4">
         <h2 class="text-xl font-semibold">Reservas Hoje</h2>
         <p class="text-3xl mt-2">{{ reservasHoje }}</p>
       </div>
@@ -33,16 +33,16 @@
 
     <!-- Tabela de Reservas -->
 <div class="mt-8">
-  <h2 class="text-xl font-semibold text-white mb-4">Reservas no Período Selecionado</h2>
+  <h2 class="text-xl font-semibold text-black mb-4">Reservas no Período Selecionado</h2>
   <div class="overflow-x-auto">
     <table class="min-w-full  border border-gray-200 rounded shadow">
-      <thead class="bg-gray-600 text-white ">
+      <thead class="bg-gray-200 text-white ">
         <tr>
-          <th class="text-left px-4 py-2 border border-gray-400">Cliente</th>
-          <th class="text-left px-4 py-2 border border-gray-400">Mesa</th>
-          <th class="text-left px-4 py-2 border border-gray-400">Data</th>
-          <th class="text-left px-4 py-2 border border-gray-400">Início</th>
-          <th class="text-left px-4 py-2 border border-gray-400">Fim</th>
+          <th class="text-left px-4 py-2 border border-gray-400 text-black">Cliente</th>
+          <th class="text-left px-4 py-2 border border-gray-400 text-black">Mesa</th>
+          <th class="text-left px-4 py-2 border border-gray-400 text-black">Data</th>
+          <th class="text-left px-4 py-2 border border-gray-400 text-black">Início</th>
+          <th class="text-left px-4 py-2 border border-gray-400 text-black">Fim</th>
         </tr>
       </thead>
       <tbody>
