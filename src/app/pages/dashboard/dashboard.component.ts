@@ -7,7 +7,7 @@ import { MesasComponent } from '../../components/mesas/mesas.component';
 import { StatisticsComponent } from '../../components/statistics/statistics.component';
 import { JwtService } from '../../services/jwt.service';
 import { CookieService } from '../../services/cookie.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { User } from '../../interfaces/users';
 import { UserService } from '../../services/user.service';
 import { LoaderComponent } from '../../components/loader/loader.component';
@@ -32,6 +32,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatToolbarModule,
     MatListModule,
     MatButtonModule,
+    RouterLink,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',

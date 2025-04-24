@@ -3,34 +3,43 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Reserva } from '../../interfaces/reservas';
 import { ReservaService } from '../../services/reserva.service';
 import { UserService } from '../../services/user.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-minhas-reservas',
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule, MatDialogModule],
   templateUrl: './minhas-reservas.component.html',
-  styleUrl: './minhas-reservas.component.css'
+  styleUrl: './minhas-reservas.component.css',
 })
 export class MinhasReservasComponent implements OnInit {
-
   @Input() userId: number = 0;
 
   reservas: Reserva[] = [];
   nome: string = 'Nome';
 
-  constructor(private reservaService: ReservaService, private userService: UserService) {}
+  constructor(
+    private reservaService: ReservaService,
+    private userService: UserService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
+
+  ) {}
 
   ngOnInit(): void {
     this.userService.getUser(this.userId).subscribe({
-      next:(value) => {
+      next: (value) => {
         this.nome = value.body?.name || 'null';
-      }
-    })
+      },
+    });
 
     this.reservaService.getAllReservasUser(this.userId).subscribe({
       next: (value) => {
-        this.reservas = value.body.reservas || []
-      }
-    })
+        this.reservas = value.body.reservas || [];
+      },
+    });
   }
 
   getFormattedTime(dateString: string): string {
@@ -43,15 +52,24 @@ export class MinhasReservasComponent implements OnInit {
 
   removeReserva(selectedReservaId: number) {
     if (!selectedReservaId) return;
-        const confirmation = confirm('Deseja remover esta reserva?');
-        if (confirmation) {
-          this.reservaService.deleteReserva(selectedReservaId).subscribe({
-            next: (value) => {
-              alert("Removido com sucesso!");
-              this.ngOnInit();
-            },
-          });
-      }  
+  
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.reservaService.deleteReserva(selectedReservaId).subscribe({
+          next: () => {
+            this.openSnackBar("Reserva fechada com sucesso!", "fechar");
+            this.ngOnInit();
+          }
+        });
+      }
+    });
+  }
+  private openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000, // Duration in milliseconds
+    });
   }
   
 }
