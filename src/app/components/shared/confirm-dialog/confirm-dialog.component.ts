@@ -10,7 +10,7 @@ import { MatDialogActions } from '@angular/material/dialog';
   template: `
     <mat-dialog-content class="p-4 text-gray-800">
       <h2 class="text-xl font-semibold mb-4">Confirmação</h2>
-      <p class="text-base">Tem certeza que deseja remover esta reserva?</p>
+      <p class="text-base">Tem certeza que deseja confirmar esta ação?</p>
     </mat-dialog-content>
 
     <mat-dialog-actions align="end" class="px-4 pb-4">
@@ -23,7 +23,7 @@ import { MatDialogActions } from '@angular/material/dialog';
         Cancelar
       </button>
       <button mat-raised-button color="warn" (click)="onConfirm()" class="cursor-pointer">
-        Remover
+        Confirmar
       </button>
     </mat-dialog-actions>
   `,
