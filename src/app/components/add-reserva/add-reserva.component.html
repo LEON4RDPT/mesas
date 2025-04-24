@@ -1,104 +1,87 @@
-<div class="shadow-2xl relative overflow-x-auto rounded-lg w-1/2 mx-auto mt-10">
-  <div
-    class="w-full text-sm text-left rtl:text-right bg-gray-700 min-h-[50vh] text-gray-100 dark:text-white shadow-2xl flex flex-col"
-  >
-    <h2 class="font-semibold text-center text-2xl my-4">Criar Nova Reserva</h2>
+<mat-card class="mx-auto mt-10 w-1/2">
+  <mat-card-header>
+    <div class="mb-4">
+      <mat-card-title class="text-2xl text-center text-black">
+        Criar Nova Reserva
+      </mat-card-title>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content>
     <form (ngSubmit)="createReserva()">
       <!-- Mesa Selection -->
-      <div class="flex mb-4">
-        <div class="mb-4 p-4 w-1/2  ">
-          <label for="mesa" class="block mb-1 text-lg font-semibold"
-            >Mesa</label
-          >
-          <select
-            (change)="handleSelectMesa($event)"
-            id="mesa" 
-            name="mesa"
-            class="w-full bg-gray-700 border rounded px-3 py-2"
+      <div class="flex space-x-4 mb-4">
+        <mat-form-field appearance="fill" class="flex-1">
+          <mat-label>Mesa</mat-label>
+          <mat-select
             required
+            [(value)]="selectedMesaId"
+            (selectionChange)="handleSelectMesa($event)"
           >
-            <option
-              class="text-white disabled:text-white"
-              value=""
-              disabled
-              selected
-            >
-              Selecione uma mesa
-            </option>
-            <option class="text-white" *ngFor="let mesa of mesas">
+            <mat-option value="" disabled>Selecione uma mesa</mat-option>
+            <mat-option *ngFor="let mesa of mesas" [value]="mesa.id">
               {{ mesa.id }}
-            </option>
-          </select>
-        </div>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
 
         <!-- Day Selection -->
-        <div class="mb-4 p-4 w-1/2">
-          <label for="dataReserva" class="block mb-1 text-lg font-semibold">Selecione o Dia</label>
-          <div class="relative">
-            <!-- Clickable Calendar Icon -->
-            <button
-              type="button"
-              (click)="openCalendar()"
-              class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white z-10"
-            >
-              <svg
-                class="w-full h-full"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-              </svg>
-            </button>
-        
-            <!-- Date Input -->
-            <input
-              #dateInputRef
-              type="date"
-              id="dataReserva"
-              name="dataReserva"
-              class="w-full border rounded px-3 py-2 pl-10 bg-gray-700 text-white appearance-none"
-              [min]="today"
-              (change)="onDateChange($event)"
-              required
-            />
-          </div>
-        </div>
-              
-        
+        <mat-form-field appearance="fill" class="flex-1">
+          <mat-label>Selecione o Dia</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [min]="today"
+            required
+            (dateChange)="onDateChange($event)"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker
+          >
+        </mat-form-field>
       </div>
 
       <!-- Time Selection (only visible after a day is selected) -->
+      <div *ngIf="selectedDate" class="flex space-x-4 mb-4">
+        <mat-form-field appearance="fill" class="flex-1">
+          <mat-label>Hora Início</mat-label>
+          <input
+            matInput
+            type="time"
+            [min]="'00:00'"
+            required
+            name="horaInicio"
+            [(ngModel)]="horaInicio"
+          />
+        </mat-form-field>
 
-      <div *ngIf="selectedDate" class="flex justify-center">
-        <div class="mb-4 mr-3 w-1/3">
-          <label for="horaInico" class="block mb-1">Hora Início</label>
-          <app-custom-time-picker
-            [minTime]="'00:00'"
-            (timeChange)="onHoraInicioChange($event)"
-          >
-          </app-custom-time-picker>
-        </div>
-        <div class="mb-4 w-1/3 ml-2">
-          <label for="horaFim" class="block mb-1">Hora Fim</label>
-          <app-custom-time-picker
-            [minTime]="horaInicio"
-            (timeChange)="onHoraFimChange($event)"
-          >
-          </app-custom-time-picker>
-        </div>
+        <mat-form-field appearance="fill" class="flex-1">
+          <mat-label>Hora Fim</mat-label>
+          <input
+            matInput
+            type="time"
+            [min]="horaInicio"
+            required
+            name="horaFim"
+            [(ngModel)]="horaFim"
+          />
+        </mat-form-field>
       </div>
 
-      <div class="absolute bottom-0 left-0 w-full flex justify-center pb-4">
+      <div class="flex justify-center">
         <button
+          mat-raised-button
+          color="primary"
           type="submit"
-          class="cursor-pointer bg-blue-500 text-white px-6 py-4 text-xl font-semibold rounded"
+          class="text-xl font-semibold px-6 py-3"
         >
           Criar Reserva
         </button>
       </div>
     </form>
-  </div>
-</div>
+  </mat-card-content>
+</mat-card>
