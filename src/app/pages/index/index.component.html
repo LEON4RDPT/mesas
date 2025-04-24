@@ -1,11 +1,45 @@
-<div class="min-h-screen flex flex-col">
+  <div class="min-h-screen flex flex-col">
     <app-navbar page="INDEX"></app-navbar>
     <div class="flex-grow">
       <div class="container-md min-h-1/2 h-100 m-4">
         <h1 class="text-4xl mt-10 text-center">Bem-vindo ao MesasMaster!</h1>
-  
+        
+        <div class="flex justify-center mt-8 flex-wrap">
+          <mat-card class="mx-4 my-4" style="width: 300px;">
+            <mat-card-header>
+              <mat-card-title>Sobre Nós</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p><br>MesasMaster é a solução ideal para gerenciar suas reservas de mesas de forma eficiente e prática.</p>
+            </mat-card-content>
+
+          </mat-card>
+
+          <mat-card class="mx-4 my-4" style="width: 300px;">
+            <mat-card-header>
+              <mat-card-title>Organizado</mat-card-title>
+            </mat-card-header>  
+            <mat-card-content>
+              <p><br>O MesasMaster transmite um ambiente bastante organizado para todos vocês.</p>
+            </mat-card-content>
+
+          </mat-card>
+
+          <mat-card class="mx-4 my-4" style="width: 300px;">
+            <mat-card-header>
+              <mat-card-title>Mesas para todos!</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p><br>Há sempre um espaço reservado só para ti. Não se esqueça das suas reservas hoje!</p>
+            </mat-card-content>
+
+          </mat-card>
+        </div>
+
+        <div class="text-center mt-10">
+          <button mat-raised-button color="accent" routerLink="/dashboard">Faça uma Reserva</button>
+        </div>
       </div>
     </div>
   </div>
-  <router-outlet />
-  
+  <router-outlet></router-outlet>

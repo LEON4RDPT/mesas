@@ -14,6 +14,8 @@ import { MatButton } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CookieService } from '../../services/cookie.service';
 
 @Component({
   selector: 'app-register',
@@ -36,7 +38,9 @@ export class RegisterComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private cookieHandler: CookieService,
+    private snackBar: MatSnackBar
   ) {
     // Initialize the form with validation rules
     this.registerForm = this.fb.group({
@@ -58,7 +62,6 @@ export class RegisterComponent {
         return;
       }
       this.passwordsDoNotMatch = false;
-      console.log('Form submitted successfully:', this.registerForm.value);
       const user: UserWithPassword = {
         id: 0,
         name: this.registerForm.value.nome,
@@ -69,22 +72,29 @@ export class RegisterComponent {
       this.authService.register(user).subscribe({
         next: (response) => {
           if (response.ok) {
-            alert('Registado com sucesso!');
-            this.router.navigate(['/login']);
+            this.openSnackBar('Registado com sucesso!', 'Fechar');
+            
+            const token : string = response.body.token;
+            if (!token) return;
+            this.cookieHandler.setCookie('authToken', token, 1)
+            this.router.navigate(['/dashboard']);
           }
         },
         error: (error) => {
           if (error.status === 400) {
-            alert('dados Inválidos!');
+            this.openSnackBar('Dados Inválidos!', 'Fechar');
           } else if (error.status === 409) {
-            alert('Email já existente!');
+            this.openSnackBar('Email já em uso!', 'Fechar');
           } else {
-            alert('Erro no Servidor!');
+            this.openSnackBar('Erro no servidor, por favor tente mais tarde.', 'Fechar');
           }
         },
       });
-    } else {
-      console.log('Form is invalid');
     }
+  }
+  private openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000, // Duration in milliseconds
+    });
   }
 }

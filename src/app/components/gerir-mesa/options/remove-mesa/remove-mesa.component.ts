@@ -64,16 +64,17 @@ export class RemoveMesaComponent implements OnInit {
       return;
     }
     const mesa = this.mesas.find((mesa) => mesa.id == this.selectedMesaId);
+    console.log(mesa);
     if (!mesa) {
       alert('Mesa não encontrada!');
       return;
     } else {
       mesa.ativo = true;
-
     }
     this.mesaService.updateMesa(mesa).subscribe({
       next:(response) => {
         alert('Mesa Ativada!')
+        console.log(response);
       },
       error:(err) => {
         console.log(err);

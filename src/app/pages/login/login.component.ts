@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,8 @@ export class LoginComponent {
     private router: Router,
     private fb: FormBuilder,
     private auth: AuthService,
-    private cookieHandler: CookieService
+    private cookieHandler: CookieService,
+    private snackBar: MatSnackBar
   ) {
     // Initialize the form with validation rules
     this.loginForm = this.fb.group({
@@ -50,7 +52,7 @@ export class LoginComponent {
           const token = response.body.token;
           if (!token) return;
           this.cookieHandler.setCookie('authToken', token, 1);
-          alert('Login bem sucedido!');
+          this.openSnackBar('Login bem sucedido!', 'Fechar'); // Show success message
           this.router.navigate(['/dashboard']);
         },
         error: (error) => {
@@ -70,5 +72,11 @@ export class LoginComponent {
     } else {
       console.log('Form is invalid');
     }
+  }
+  
+  private openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000, // Duration in milliseconds
+    });
   }
 }

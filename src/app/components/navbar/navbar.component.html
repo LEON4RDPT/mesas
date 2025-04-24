@@ -1,32 +1,33 @@
-<mat-toolbar class="header w-full sticky top-0 bg-white shadow-md">
+<mat-toolbar class="header w-full sticky top-0 bg-white shadow-md flex items-center justify-between px-4">
   <!-- Logo on the left -->
-  <h1 class="flex-none">
-    <a routerLink="">
-      <span class="text-lg">MesasMaster</span>
-    </a>
-  </h1>
+  <div class="flex-1">
+    <h1>
+      <a routerLink="" class="text-lg ">MesasMaster</a>
+    </h1>
+  </div>
 
-  <!-- Navigation in the center -->
-  <nav class="flex-grow flex justify-center">
-    <ul class="flex space-x-4 mr-15"> <!-- Added space-x-4 for spacing -->
-      <li >
+  <!-- Centered Navigation -->
+  <div class="flex-1 flex justify-center">
+    <ul class="flex space-x-4">
+      <li *ngIf="!entrou">
         <a mat-button routerLink="/login" class="nav-link">Login</a>
       </li>
-      <li>
+      <li *ngIf="!entrou">
         <a mat-button routerLink="/register" class="nav-link">Registo</a>
       </li>
-    </ul>
-  </nav>
 
-  <!-- Icon button on the right -->
-  <div class="flex-none">
-    <button mat-icon-button>
-      <mat-icon>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
-        </svg>
-      </mat-icon>
-    </button>
+      <li *ngIf="entrou">
+        <a mat-button routerLink="/dashboard" class="nav-link">Entrar</a>
+      </li>
+      <li *ngIf="entrou">
+        <button mat-button (click)="logout()" class="nav-link">Logout</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Right section (empty or add icons if needed) -->
+  <div class="flex-1 text-right">
+    <!-- Future icon or user info can go here -->
   </div>
 </mat-toolbar>
 

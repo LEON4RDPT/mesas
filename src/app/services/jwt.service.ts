@@ -10,10 +10,20 @@ export class JwtService {
   getUserIdFromToken(token: string): string | null {
     try {
       const decodedToken: any = jwtDecode(token); // Attempt to decode the token
-      console.log(decodedToken);
       return decodedToken?.UserId || null; // Return the UserId if it exists
     } catch {
       return null;
     }
   }
+
+  getUserNameFromToken(token: string): string | null {
+    try {
+      const decodedToken: any = jwtDecode(token); // Attempt to decode the token
+      return decodedToken?.unique_name || null; // Return the UserId if it exists
+    } catch {
+      return null;
+    }
+  }
+
+ 
 }
